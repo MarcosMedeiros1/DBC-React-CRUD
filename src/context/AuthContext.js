@@ -9,11 +9,18 @@ const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
 
   const handleLogin = async (user) => {
-    const { data } = await api.post("/auth", user);
+    try {
+      const { data } = await api.post("/auth", user);
 
-    localStorage.setItem("token", data);
-    setAuth(true);
-    navigate("/user");
+      localStorage.setItem("token", data);
+      setAuth(true);
+      navigate("/user");
+
+      alert("Login realizado com sucesso");
+    } catch (error) {
+      console.log(error);
+      alert("Login ou senha incorretos");
+    }
   };
 
   return (
