@@ -14,8 +14,8 @@ const SignupSchema = Yup.object().shape({
     .required("Campo obrigatório"),
 });
 
-const Login = () => {
-  const { handleLogin } = useContext(AuthContext);
+const Users = () => {
+  const { handleSignUp } = useContext(AuthContext);
   return (
     <div>
       <h1>Realizar login</h1>
@@ -26,7 +26,7 @@ const Login = () => {
         }}
         validationSchema={SignupSchema}
         onSubmit={(values) => {
-          handleLogin(values);
+          handleSignUp("/auth/create", values, "Usuário");
         }}
       >
         {({ errors, touched }) => (
@@ -37,7 +37,7 @@ const Login = () => {
             <Field type="password" name="senha" />
             {errors.senha && touched.senha ? <div>{errors.senha}</div> : null}
 
-            <button type="submit">Entrar</button>
+            <button type="submit">Cadastrar</button>
           </Form>
         )}
       </Formik>
@@ -45,4 +45,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Users;
