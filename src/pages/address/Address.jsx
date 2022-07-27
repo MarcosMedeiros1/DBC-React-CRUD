@@ -37,11 +37,10 @@ const Address = () => {
   }, []);
 
   const buscaCep = async (event, setFieldValue) => {
-    const cep = event.target.value;
+    const cep = event.target.value.replace("-", "");
 
     try {
       const { data } = await apiViaCep.get(`/ws/${cep}/json`)
-
       setFieldValue("logradouro", data.logradouro)
       setFieldValue("complemento", data.complemento)
       setFieldValue("cidade", data.localidade)
@@ -68,7 +67,7 @@ const Address = () => {
         }}
         validationSchema={SignupSchema}
         onSubmit={(values) => {
-          handleSignUp("/endereco/0", values, "Endereço");
+          handleSignUp(`/endereco/${1}`, values, "Endereço");
         }}
       >
 
