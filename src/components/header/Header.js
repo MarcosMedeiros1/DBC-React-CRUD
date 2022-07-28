@@ -1,12 +1,13 @@
 import Logo from "./Logo";
 import Menu from "./Menu";
+import { ContainerHeader } from './Header.styled';
 
 const Header = () => {
   return (
-    <header>
+    <ContainerHeader>
       <Logo />
       <Menu />
-    </header>
+    </ContainerHeader>
   );
 };
 export default Header;

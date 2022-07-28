@@ -2,6 +2,7 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { Title, Container, FormDiv, FormItem, SubTitle, TitleDiv, ErrorMessage, LoginDiv } from "./Login.styled";
 
 const SignupSchema = Yup.object().shape({
   login: Yup.string()
@@ -17,31 +18,45 @@ const SignupSchema = Yup.object().shape({
 const Login = () => {
   const { handleLogin } = useContext(AuthContext);
   return (
-    <div>
-      <h1>Realizar login</h1>
-      <Formik
-        initialValues={{
-          login: "",
-          senha: "",
-        }}
-        validationSchema={SignupSchema}
-        onSubmit={(values) => {
-          handleLogin(values);
-        }}
-      >
-        {({ errors, touched }) => (
-          <Form>
-            <Field name="login" />
-            {errors.login && touched.login ? <div>{errors.login}</div> : null}
+    <Container>
+      <LoginDiv>
 
-            <Field type="password" name="senha" />
-            {errors.senha && touched.senha ? <div>{errors.senha}</div> : null}
+        <TitleDiv>
+          <Title>Realizar login</Title>
+          <SubTitle>Informe seu login e senha abaixo</SubTitle>
+        </TitleDiv>
+        <Formik
+          initialValues={{
+            login: "",
+            senha: "",
+          }}
+          validationSchema={SignupSchema}
+          onSubmit={(values) => {
+            handleLogin(values);
+          }}
+        >
+          {({ errors, touched }) => (
+            <Form>
+              <FormDiv>
+                <FormItem>
+                  <label htmlFor="login">LOGIN</label>
+                  <Field name="login" placeholder="Login" />
+                  {errors.login && touched.login ? <ErrorMessage>{errors.login}</ErrorMessage> : null}
+                </FormItem>
 
-            <button type="submit">Entrar</button>
-          </Form>
-        )}
-      </Formik>
-    </div>
+                <FormItem>
+                  <label htmlFor="senha">SENHA</label>
+                  <Field type="password" name="senha" placeholder="Senha" />
+                  {errors.senha && touched.senha ? <ErrorMessage>{errors.senha}</ErrorMessage> : null}
+                </FormItem>
+
+                <button type="submit">Entrar</button>
+              </FormDiv>
+            </Form>
+          )}
+        </Formik>
+      </LoginDiv>
+    </Container>
   );
 };
 

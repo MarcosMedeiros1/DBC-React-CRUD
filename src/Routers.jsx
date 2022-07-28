@@ -7,7 +7,8 @@ import Address from "./pages/address/Address";
 import Login from "./pages/login/Login";
 import People from "./pages/people/People";
 import Users from "./pages/users/Users";
-import NotFound from "./pages/notFound/NotFound"
+import NotFound from "./pages/notFound/NotFound";
+import GlobalStyle from './globalStyle';
 
 
 const Routers = () => {
@@ -16,6 +17,7 @@ const Routers = () => {
   return (
     <>
       <BrowserRouter>
+        <GlobalStyle />
         <Header />
         <Routes>
           {!auth ? (

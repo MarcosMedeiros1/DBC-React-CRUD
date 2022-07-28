@@ -11,8 +11,8 @@ const SignupSchema = Yup.object().shape({
     .max(50, "Máximo 50 caracteres")
     .required("Campo obrigatório"),
   dataNascimento: Yup.string()
-    .min(8, "Mínimo 8 caracteres")
-    .max(50, "Máximo 8 caracteres")
+    .min(10, "Mínimo 8 caracteres")
+    .max(10, "Máximo 8 caracteres")
     .required("Campo obrigatório")
     .required("Campo obrigatório"),
   cpf: Yup.string()

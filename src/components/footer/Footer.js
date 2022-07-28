@@ -1,9 +1,11 @@
+import { FooterContainer } from './Footer.styled'
+
 const Footer = () => {
   return (
-    <footer>
+    <FooterContainer>
       <address>Rua Lorem ipsum dolor</address>
       <small>Copyright</small>
-    </footer>
+    </FooterContainer>
   );
 };
 
