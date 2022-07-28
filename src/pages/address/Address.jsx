@@ -26,7 +26,7 @@ const cepMask = [
 ];
 
 const Address = () => {
-  const { handleSignUp } = useContext(AuthContext);
+  const { handleRegister } = useContext(AuthContext);
   const navigate = useNavigate();
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -67,7 +67,7 @@ const Address = () => {
         }}
         validationSchema={SignupSchema}
         onSubmit={(values) => {
-          handleSignUp(`/endereco/${1}`, values, "Endereço");
+          handleRegister(`/endereco/${1}`, values, "Endereço", "post");
         }}
       >
 

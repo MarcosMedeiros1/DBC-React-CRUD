@@ -15,10 +15,10 @@ const SignupSchema = Yup.object().shape({
 });
 
 const Users = () => {
-  const { handleSignUp } = useContext(AuthContext);
+  const { handleRegister } = useContext(AuthContext);
   return (
     <div>
-      <h1>Realizar login</h1>
+      <h1>Cadastrar usuário</h1>
       <Formik
         initialValues={{
           login: "",
@@ -26,7 +26,7 @@ const Users = () => {
         }}
         validationSchema={SignupSchema}
         onSubmit={(values) => {
-          handleSignUp("/auth/create", values, "Usuário");
+          handleRegister("/auth/create", values, "Usuário", "post");
         }}
       >
         {({ errors, touched }) => (
