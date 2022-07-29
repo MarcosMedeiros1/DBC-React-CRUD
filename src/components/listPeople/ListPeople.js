@@ -2,12 +2,13 @@ import { useContext } from "react";
 import { PeopleContext } from "../../context/PeopleContext";
 import { ButtonSecondary } from "../button/Button";
 import Modal from "../modal/Modal";
+import { ContainerList, List, ListHeader, ListItem } from "./ListPeople.styled"
 
 const ListPeople = ({ list }) => {
   const { handleDelete, confirmDelete, handleUpdate, isModalVisible, setIsModalVisible } = useContext(PeopleContext);
 
   return (
-    <div>
+    <ContainerList>
       {isModalVisible &&
         <Modal
           onCancel={() => setIsModalVisible(false)}
@@ -15,20 +16,31 @@ const ListPeople = ({ list }) => {
           <h2>Confirmar exclusão?</h2>
         </Modal>}
 
-      {list.map(item => (
-        <div key={item.idPessoa}>
-          <p>Nome: {item.nome}</p>
-          <p>Data de nascimento: {item.dataNascimento}</p>
-          <p>CPF: {item.cpf}</p>
-          <p>Email: {item.email}</p>
+      <List>
+        <ListHeader>
+          <span>Nome</span>
+          <span>Data de nascimento</span>
+          <span>CPF</span>
+          <span>Email</span>
+          <span>Ações</span>
+        </ListHeader>
+        {list.map(item => (
+          <ListItem key={item.idPessoa}>
+            <span>{item.nome}</span>
+            <span>{item.dataNascimento}</span>
+            <span>{item.cpf}</span>
+            <span>{item.email}</span>
 
-          <ButtonSecondary type="button" padding={"6px 8px"} onClick={() => handleDelete(item.idPessoa)}>Excluir</ButtonSecondary>
+            <div>
+              <ButtonSecondary type="button" padding={"6px 8px"} onClick={() => handleDelete(item.idPessoa)}>Excluir</ButtonSecondary>
 
-          <ButtonSecondary type="button" padding={"6px 8px"} onClick={() => handleUpdate(item.idPessoa)}>Editar</ButtonSecondary >
-        </div>
-      ))
-      }
-    </div >
+              <ButtonSecondary type="button" padding={"6px 8px"} onClick={() => handleUpdate(item.idPessoa)}>Editar</ButtonSecondary >
+            </div>
+          </ListItem>
+        ))
+        }
+      </List>
+    </ContainerList>
   )
 }
 export default ListPeople;

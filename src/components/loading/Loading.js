@@ -10,6 +10,9 @@ export const Loading = styled.button`
     }
   }
   display: inline-block;
+  position: fixed;
+  top: 50%;
+  left: 50%;
 	border: 4px solid rgba(255, 255, 255, 0.1);
 	border-left-color: #000;
 	border-radius: 50%;

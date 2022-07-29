@@ -21,7 +21,7 @@ const Menu = () => {
             <Item name="Pessoas" url="/pessoas" />
           </>
         )}
-        {token && <ButtonSecondary padding={"6px 8px"} onClick={handleLogout}>Sair</ButtonSecondary>}
+        {token && <ButtonSecondary padding={"6px 16px"} onClick={handleLogout}>Sair</ButtonSecondary>}
       </Ul>
     </nav>
   );

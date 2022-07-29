@@ -1,4 +1,5 @@
-import styles from "./Modal.module.css";
+import { BackgroundModal, ContainerModal, TextModal, ButtonsModal } from './Modal.styled';
+import { ButtonPrimary, ButtonSecondary } from '../button/Button'
 
 const Modal = ({ onCancel = () => { }, onConfirm = () => { }, children }) => {
 
@@ -9,17 +10,20 @@ const Modal = ({ onCancel = () => { }, onConfirm = () => { }, children }) => {
   }
 
   return (
-    <div id="modal" onClick={handleOutsideClick} className={styles.modal}>
-      <div>
-        <div className={styles.content}>
+    <BackgroundModal id="modal" onClick={handleOutsideClick}>
+      <ContainerModal>
+
+        <TextModal>
           {children}
-        </div>
-        <div>
-          <button onClick={onCancel} className={styles.cancel}>Cancelar</button>
-          <button onClick={onConfirm} className={styles.confirm}>Confirmar</button>
-        </div>
-      </div>
-    </div>
+        </TextModal>
+
+        <ButtonsModal>
+          <ButtonSecondary padding={"6px 8px"} onClick={onCancel} >Cancelar</ButtonSecondary>
+
+          <ButtonPrimary padding={"6px 8px"} onClick={onConfirm} >Confirmar</ButtonPrimary>
+        </ButtonsModal>
+      </ContainerModal>
+    </BackgroundModal>
   )
 }
 export default Modal
