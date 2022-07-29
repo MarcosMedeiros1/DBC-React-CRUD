@@ -5,7 +5,7 @@ import MaskedInput from "react-text-mask";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { apiViaCep } from "../../api";
-import { cepMask } from "../../utils/Masks";
+import { cepMask } from "../../utils/masks";
 
 const SignupSchema = Yup.object().shape({
   cep: Yup.string()

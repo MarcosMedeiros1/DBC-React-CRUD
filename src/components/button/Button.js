@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { primaryColor, secondaryColor } from "../../utils/Colors";
+import { primaryColor, secondaryColor } from "../../utils/colors";
 
 export const ButtonPrimary = styled.button`
   background-color: ${primaryColor};

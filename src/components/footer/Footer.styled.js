@@ -6,4 +6,6 @@ export const FooterContainer = styled.footer`
   align-items: center;
   gap: 24px;
   padding: 16px;
+  color: #fff;
+  background-color: #363740;
 `

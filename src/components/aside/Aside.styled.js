@@ -1,16 +1,22 @@
 import styled from "styled-components";
-import { primaryColor, secondaryColor } from "../../utils/Colors";
+import { primaryColor, secondaryColor } from "../../utils/colors";
 
 export const AsideContainer = styled.aside`
-  background-color: #363740;
   display: grid;
   align-content: start;
-  gap: 64px;
+  gap: 48px;
+  height: 100%;
+  background-color: #363740;
+`
+
+export const Nav = styled.nav`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
 `
 
 export const Ul = styled.ul`
   display: grid;
-  border-bottom: 1px solid #DFE0EB;
   list-style: none;
 
   & li{

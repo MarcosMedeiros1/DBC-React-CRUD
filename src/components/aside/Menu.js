@@ -1,15 +1,13 @@
 import Item from "./Item";
+import { Nav, Ul } from './Aside.styled';
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { Ul } from './Aside.styled';
-import { ButtonSecondary } from "../button/Button";
-
 
 const Menu = () => {
-  const token = localStorage.getItem("token");
   const { handleLogout } = useContext(AuthContext);
+  const token = localStorage.getItem("token");
   return (
-    <nav>
+    <Nav>
       <Ul>
         {!token ? (
           <>
@@ -20,11 +18,11 @@ const Menu = () => {
           <>
             <Item name="Endereço" url="/endereco" />
             <Item name="Pessoas" url="/pessoas" />
+            <Item name="Sair" url="" click={handleLogout}>Sair</Item>
           </>
         )}
       </Ul>
-      {token && <ButtonSecondary padding={"6px 16px"} onClick={handleLogout}>Sair</ButtonSecondary>}
-    </nav>
+    </Nav>
   );
 };
 

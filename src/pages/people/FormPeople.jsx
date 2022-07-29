@@ -9,7 +9,8 @@ import { AuthContext } from "../../context/AuthContext";
 import { PeopleContext } from "../../context/PeopleContext";
 import { apiDbc } from "../../api";
 import { Loading } from "../../components/loading/Loading";
-import { cpfMask, dateMask } from "../../utils/Masks";
+import { cpfMask, dateMask } from "../../utils/masks";
+import { FormatDateBrToUsa, FormatDateUsaToBr, OnlyNumbers } from "../../utils/utils";
 
 
 const SignupSchema = Yup.object().shape({
@@ -18,15 +19,15 @@ const SignupSchema = Yup.object().shape({
     .max(50, "Máximo 50 caracteres")
     .required("Campo obrigatório"),
   dataNascimento: Yup.string()
-    .min(10, "Mínimo 8 caracteres")
-    .max(10, "Máximo 8 caracteres")
-    .transform(value => value.replace(/_/g, ''))
+    .transform(value => OnlyNumbers(value))
+    .min(8, "Mínimo 8 caracteres")
+    .max(8, "Máximo 8 caracteres")
     .required("Campo obrigatório")
     .required("Campo obrigatório"),
   cpf: Yup.string()
-    .min(14, "Mínimo 11 caracteres")
-    .max(14, "Máximo 11 caracteres")
-    .transform(value => value.replace(/_/g, ''))
+    .transform(value => OnlyNumbers(value))
+    .min(11, "Mínimo 11 caracteres")
+    .max(11, "Máximo 11 caracteres")
     .required("Campo obrigatório")
     .required("Campo obrigatório"),
   email: Yup.string()
@@ -66,18 +67,18 @@ const FormPeople = () => {
     <div>
       <Formik initialValues={{
         nome: id ? pessoa.nome : "",
-        dataNascimento: id ? pessoa.dataNascimento.split("-").reverse().join("/") : "",
-        cpf: id ? pessoa.cpf : "",
+        dataNascimento: id ? FormatDateUsaToBr(pessoa.dataNascimento) : "",
+        cpf: id ? OnlyNumbers(pessoa.cpf) : "",
         email: id ? pessoa.email : "",
       }}
         validationSchema={SignupSchema}
         onSubmit={(values, { resetForm }) => {
-          values.dataNascimento = values.dataNascimento.split("/").reverse().join("-");
-          values.cpf = values.cpf.match(/\d/g).join("");
-          handleRegister(endpoint, values, "Pessoa", method);
-          setMethod("post");
-          resetForm({ value: "" })
-          window.location.href = "/pessoas"; // Problema ao editar pessoa (não edita da primeira vez)
+          values.dataNascimento = FormatDateBrToUsa(values.dataNascimento);
+          values.cpf = OnlyNumbers(values.cpf);
+          // handleRegister(endpoint, values, "Pessoa", method);
+          // setMethod("post");
+          // resetForm({ value: "" });
+          // window.location.href = "/pessoas"; // Problema ao editar pessoa (não edita da primeira vez)
         }}
       >
         {({ errors, touched }) => (
@@ -116,6 +117,7 @@ const FormPeople = () => {
                       type="text"
                     />
                   )}
+
                 </Field>
                 {errors.cpf && touched.cpf ? (
                   <ErrorMessage>{errors.cpf}</ErrorMessage>
@@ -123,7 +125,7 @@ const FormPeople = () => {
               </FormItem>
 
               <FormItem>
-                <Field name="email" placeholder="Email" />
+                <Field name="email" placeholder="Email" type="email" />
                 {errors.email && touched.email ? (
                   <ErrorMessage>{errors.email}</ErrorMessage>
                 ) : null}
@@ -137,7 +139,7 @@ const FormPeople = () => {
           </Form>
         )}
       </Formik>
-    </div>
+    </div >
   )
 }
 export default FormPeople;

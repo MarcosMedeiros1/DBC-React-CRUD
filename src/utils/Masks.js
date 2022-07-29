@@ -29,7 +29,7 @@ export const cpfMask = [
 ];
 
 export const cepMask = [
-  /[1-9]/,
+  /[0-9]/,
   /\d/,
   /\d/,
   /\d/,

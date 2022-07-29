@@ -37,8 +37,7 @@ const PeopleProvider = ({ children }) => {
       await apiDbc.delete(`/pessoa/${idPessoa}`);
       setIsModalVisible(false);
       alert("Pessoa deletada com sucesso");
-      const { data } = await apiDbc.get("/pessoa?pagina=0&tamanhoDasPaginas=20");
-      setPessoas(data.content);
+      setup();
     } catch (error) {
       alert(error)
     }
