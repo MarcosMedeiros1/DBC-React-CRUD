@@ -1,6 +1,7 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { apiDbc } from "../api";
 import { Loading } from "../components/loading/Loading";
+import { AuthContext } from "./AuthContext";
 
 const PeopleContext = createContext();
 
@@ -10,6 +11,7 @@ const PeopleProvider = ({ children }) => {
   const [method, setMethod] = useState("post");
   const [pessoas, setPessoas] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { auth } = useContext(AuthContext);
 
   const setup = async () => {
     try {
@@ -22,7 +24,7 @@ const PeopleProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    setup();
+    auth ? setup() : setLoading(false);
   }, [])
 
   const handleDelete = async (idPessoa) => {

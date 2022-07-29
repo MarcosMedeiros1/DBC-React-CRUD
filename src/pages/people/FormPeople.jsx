@@ -1,3 +1,4 @@
+import MaskedInput from "react-text-mask";
 import { useParams } from "react-router-dom"
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
@@ -8,6 +9,8 @@ import { AuthContext } from "../../context/AuthContext";
 import { PeopleContext } from "../../context/PeopleContext";
 import { apiDbc } from "../../api";
 import { Loading } from "../../components/loading/Loading";
+import { cpfMask, dateMask } from "../../utils/Masks";
+
 
 const SignupSchema = Yup.object().shape({
   nome: Yup.string()
@@ -17,11 +20,13 @@ const SignupSchema = Yup.object().shape({
   dataNascimento: Yup.string()
     .min(10, "Mínimo 8 caracteres")
     .max(10, "Máximo 8 caracteres")
+    .transform(value => value.replace(/_/g, ''))
     .required("Campo obrigatório")
     .required("Campo obrigatório"),
   cpf: Yup.string()
-    .min(1, "Mínimo 11 caracteres")
-    .max(11, "Máximo 11 caracteres")
+    .min(14, "Mínimo 11 caracteres")
+    .max(14, "Máximo 11 caracteres")
+    .transform(value => value.replace(/_/g, ''))
     .required("Campo obrigatório")
     .required("Campo obrigatório"),
   email: Yup.string()
@@ -61,12 +66,14 @@ const FormPeople = () => {
     <div>
       <Formik initialValues={{
         nome: id ? pessoa.nome : "",
-        dataNascimento: id ? pessoa.dataNascimento : "",
+        dataNascimento: id ? pessoa.dataNascimento.split("-").reverse().join("/") : "",
         cpf: id ? pessoa.cpf : "",
         email: id ? pessoa.email : "",
       }}
         validationSchema={SignupSchema}
         onSubmit={(values, { resetForm }) => {
+          values.dataNascimento = values.dataNascimento.split("/").reverse().join("-");
+          values.cpf = values.cpf.match(/\d/g).join("");
           handleRegister(endpoint, values, "Pessoa", method);
           setMethod("post");
           resetForm({ value: "" })
@@ -84,14 +91,32 @@ const FormPeople = () => {
               </FormItem>
 
               <FormItem>
-                <Field name="dataNascimento" placeholder="Data de nascimento" />
+                <Field name="dataNascimento" >
+                  {({ field }) => (
+                    <MaskedInput
+                      {...field}
+                      mask={dateMask}
+                      placeholder="Data de nascimento"
+                      type="text"
+                    />
+                  )}
+                </Field>
                 {errors.dataNascimento && touched.dataNascimento ? (
                   <ErrorMessage>{errors.dataNascimento}</ErrorMessage>
                 ) : null}
               </FormItem>
 
               <FormItem>
-                <Field name="cpf" placeholder="CPF" />
+                <Field name="cpf"  >
+                  {({ field }) => (
+                    <MaskedInput
+                      {...field}
+                      mask={cpfMask}
+                      placeholder="CPF"
+                      type="text"
+                    />
+                  )}
+                </Field>
                 {errors.cpf && touched.cpf ? (
                   <ErrorMessage>{errors.cpf}</ErrorMessage>
                 ) : null}
