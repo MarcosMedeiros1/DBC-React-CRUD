@@ -2,7 +2,8 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { Title, Container, FormDiv, FormItem, SubTitle, TitleDiv, ErrorMessage, LoginDiv } from "./Login.styled";
+import { FormContainer, FormSection, TitleDiv, Title, SubTitle, FormDiv, FormItem, ErrorMessage } from "../../styles/FormDefault.styled";
+import { ButtonPrimary } from "../../components/button/Button";
 
 const SignupSchema = Yup.object().shape({
   login: Yup.string()
@@ -18,8 +19,8 @@ const SignupSchema = Yup.object().shape({
 const Login = () => {
   const { handleLogin } = useContext(AuthContext);
   return (
-    <Container>
-      <LoginDiv>
+    <FormContainer>
+      <FormSection>
 
         <TitleDiv>
           <Title>Realizar login</Title>
@@ -50,13 +51,13 @@ const Login = () => {
                   {errors.senha && touched.senha ? <ErrorMessage>{errors.senha}</ErrorMessage> : null}
                 </FormItem>
 
-                <button type="submit">Entrar</button>
+                <ButtonPrimary padding={"16px 32px"} type="submit">Entrar</ButtonPrimary>
               </FormDiv>
             </Form>
           )}
         </Formik>
-      </LoginDiv>
-    </Container>
+      </FormSection>
+    </FormContainer >
   );
 };
 

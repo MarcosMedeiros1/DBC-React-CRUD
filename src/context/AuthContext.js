@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { apiDbc } from "../api";
+import { Loading } from "../components/loading/Loading";
 
 const AuthContext = createContext();
 
@@ -65,7 +66,7 @@ const AuthProvider = ({ children }) => {
   };
 
   if (loading) {
-    return (<h1>Carregando...</h1>)
+    return (<Loading></Loading>)
   }
 
   return (

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const FormContainer = styled.div`
   display: grid;
   grid-template-columns: 380px;
   justify-content: center;
@@ -9,11 +9,10 @@ export const Container = styled.div`
   background-color: #363740;
 `
 
-export const LoginDiv = styled.div`
+export const FormSection = styled.section`
   padding: 40px 32px;
   background-color: #fff;
   border-radius: 8px;
-
 `
 
 export const TitleDiv = styled.div`
@@ -38,11 +37,12 @@ export const FormDiv = styled.div`
 
 export const FormItem = styled.div`
   display: grid;
+  align-content: start;
   gap: 6px;
   color: #9FA2B4;
   & input{
     background-color: #FCFDFE;
-    border: 1px solid #F0F1F7;
+    border: 1px solid #9FA2B4;
     border-radius: 8px;
     padding: 12px 16px;
   }
@@ -53,4 +53,5 @@ export const FormItem = styled.div`
 
 export const ErrorMessage = styled.span`
   color: #F12B2C;
+  font-size: 12px;
 `

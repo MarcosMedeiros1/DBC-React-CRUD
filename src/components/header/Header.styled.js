@@ -17,24 +17,38 @@ export const LogoContainer = styled.div`
   }
 `
 
-export const Nav = styled.nav`
-display: flex;
-`
-
 export const Ul = styled.ul`
   list-style: none;
   display: flex;
-  gap: 8px;
+  align-items: center;
+  gap: 16px;
   justify-content: space-between;
+
   & a{
     text-decoration: none;
     color: #000;
-    padding: 8px;
     border-radius: 8px;
     transition: 0.2s;
+    position: relative;
   }
-  & a:hover{
-    color: #fff;
-    background-color: #363740;
+
+  & a::after{
+    content: '';
+    position: absolute;
+    height: 1px;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    opacity: 0;
+    transform: translateY(3px);
+    background: #000;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  & a:hover::after{
+    opacity: 1;
+    transform: translateY(0);
   }
 `
+
+

@@ -2,6 +2,8 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { ButtonPrimary } from "../../components/button/Button";
+import { FormContainer, FormSection, TitleDiv, Title, SubTitle, FormDiv, FormItem, ErrorMessage } from "../../styles/FormDefault.styled";
 
 const SignupSchema = Yup.object().shape({
   login: Yup.string()
@@ -17,31 +19,44 @@ const SignupSchema = Yup.object().shape({
 const Users = () => {
   const { handleRegister } = useContext(AuthContext);
   return (
-    <div>
-      <h1>Cadastrar usuário</h1>
-      <Formik
-        initialValues={{
-          login: "",
-          senha: "",
-        }}
-        validationSchema={SignupSchema}
-        onSubmit={(values) => {
-          handleRegister("/auth/create", values, "Usuário", "post");
-        }}
-      >
-        {({ errors, touched }) => (
-          <Form>
-            <Field name="login" />
-            {errors.login && touched.login ? <div>{errors.login}</div> : null}
+    <FormContainer>
+      <FormSection>
+        <TitleDiv>
+          <Title>Cadastrar usuario</Title>
+          <SubTitle>Informe o login e senha para cadastro</SubTitle>
+        </TitleDiv>
+        <Formik
+          initialValues={{
+            login: "",
+            senha: "",
+          }}
+          validationSchema={SignupSchema}
+          onSubmit={(values) => {
+            handleRegister("/auth/create", values, "Usuário", "post");
+          }}
+        >
+          {({ errors, touched }) => (
+            <Form>
+              <FormDiv>
+                <FormItem>
+                  <label htmlFor="login">LOGIN</label>
+                  <Field name="login" placeholder="Login" />
+                  {errors.login && touched.login ? <ErrorMessage>{errors.login}</ErrorMessage> : null}
+                </FormItem>
 
-            <Field type="password" name="senha" />
-            {errors.senha && touched.senha ? <div>{errors.senha}</div> : null}
+                <FormItem>
+                  <label htmlFor="senha">SENHA</label>
+                  <Field type="password" name="senha" placeholder="Senha" />
+                  {errors.senha && touched.senha ? <ErrorMessage>{errors.senha}</ErrorMessage> : null}
+                </FormItem>
 
-            <button type="submit">Cadastrar</button>
-          </Form>
-        )}
-      </Formik>
-    </div>
+                <ButtonPrimary padding={"16px 32px"} type="submit">Cadastrar</ButtonPrimary>
+              </FormDiv>
+            </Form>
+          )}
+        </Formik>
+      </FormSection>
+    </FormContainer>
   );
 };
 
