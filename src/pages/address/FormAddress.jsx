@@ -1,15 +1,16 @@
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { useEffect, useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import MaskedInput from "react-text-mask";
-import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext";
-import { apiViaCep } from "../../api";
+import { useNavigate, useParams } from "react-router-dom";
+import { apiDbc, apiViaCep } from "../../api";
 import { cepMask } from "../../utils/masks";
 import { FormContainer, FormDiv, FormItem, FormSection, TitleDiv } from "../../components/form/Form";
 import { ButtonPrimary, ButtonSecondary } from "../../components/button/Button";
 import { OnlyNumbers } from "../../utils/utils";
 import { ErrorMessage } from "../../components/form/Form";
+import { AddressContext } from "../../context/AddressContext";
+import { Loading } from "../../components/loading/Loading";
 
 const SignupSchema = Yup.object().shape({
   cep: Yup.string()
@@ -47,14 +48,24 @@ const SignupSchema = Yup.object().shape({
 });
 
 const FormAddress = () => {
-  const { handleRegister } = useContext(AuthContext);
+  const { handleCreate, handleUpdate } = useContext(AddressContext);
+  const { idPerson, idAddress } = useParams();
   const navigate = useNavigate();
-  useEffect(() => {
-    const token = localStorage.getItem("token");
+  const [address, setAddress] = useState({});
+  const [loading, setLoading] = useState(true);
 
-    if (!token) {
-      navigate("/");
+  const setup = async () => {
+    try {
+      const { data } = await apiDbc.get(`/endereco/${idAddress}`);
+      setAddress(data);
+      setLoading(false);
+    } catch (error) {
+      alert(error);
     }
+  }
+
+  useEffect(() => {
+    idAddress ? setup() : setLoading(false);
   }, []);
 
   const buscaCep = async (event, setFieldValue) => {
@@ -71,6 +82,10 @@ const FormAddress = () => {
     }
   }
 
+  if (loading) {
+    return (<Loading></Loading>)
+  }
+
   return (
     <FormContainer>
       <FormSection>
@@ -79,22 +94,23 @@ const FormAddress = () => {
         </TitleDiv>
         <Formik
           initialValues={{
-            idPessoa: 0,
-            tipo: "",
-            logradouro: "",
-            numero: "",
-            complemento: "",
-            cep: "",
-            cidade: "",
-            estado: "",
-            pais: "Brasil"
+            idPessoa: idPerson,
+            tipo: idAddress ? address.tipo : "",
+            logradouro: idAddress ? address.logradouro : "",
+            numero: idAddress ? address.numero : "",
+            complemento: idAddress ? address.complemento : "",
+            cep: idAddress ? address.cep : "",
+            cidade: idAddress ? address.cidade : "",
+            estado: idAddress ? address.estado : "",
+            pais: idAddress ? address.pais : ""
           }}
           validationSchema={SignupSchema}
           onSubmit={(values) => {
-            handleRegister(`/endereco/${1}`, values, "Endereço", "post");
+            values.cep = OnlyNumbers(values.cep);
+            idAddress ? handleUpdate(values, idAddress) : handleCreate(values);
+
           }}
         >
-
           {({ errors, touched, setFieldValue }) => (
             <Form>
               <FormDiv>
@@ -151,7 +167,7 @@ const FormAddress = () => {
 
                 <FormItem>
                   <div>
-                    <ButtonSecondary type="button" padding={"12px 32px"} onClick={() => window.location.href = '/pessoas'}>Cancelar</ButtonSecondary>
+                    <ButtonSecondary type="button" padding={"12px 32px"} onClick={() => navigate(`/enderecos/${idPerson}`)}>Cancelar</ButtonSecondary>
 
                     <ButtonPrimary padding={"16px 32px"} type="submit">Cadastrar</ButtonPrimary>
                   </div>

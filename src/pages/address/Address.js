@@ -5,14 +5,13 @@ import Aside from "../../components/aside/Aside";
 import { useParams } from "react-router-dom";
 import { AddressContext } from "../../context/AddressContext";
 
-const People = () => {
+const Address = () => {
   const { id } = useParams();
   const { getAddress, address } = useContext(AddressContext);
 
   useEffect(() => {
     getAddress(id);
   }, [])
-
 
   return (
     <Container>
@@ -24,4 +23,4 @@ const People = () => {
   )
 }
 
-export default People;
+export default Address;

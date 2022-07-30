@@ -4,7 +4,7 @@ import { FaTrashAlt, FaUserEdit } from 'react-icons/fa';
 import { PeopleContext } from "../../context/PeopleContext";
 import { ButtonPrimary, ButtonSecondary, DefaultButton } from "../button/Button";
 import Modal from "../modal/Modal";
-import { ContainerList, List, ListHeader, ListItem, ListTitle } from "./ListPeople.styled"
+import { ContainerList, List, ListHeader, ListItem, ListTitle } from "../list/List"
 import { FormatDateUsaToBr } from "../../utils/utils";
 
 const ListPeople = ({ list }) => {
@@ -12,7 +12,7 @@ const ListPeople = ({ list }) => {
 
   const navigate = useNavigate();
 
-  const handleCreate = () => {
+  const navigateCreate = () => {
     navigate('/cadastrar-pessoa');
   }
 
@@ -31,7 +31,7 @@ const ListPeople = ({ list }) => {
 
       <ListTitle>
         <h2>Pessoas</h2>
-        <ButtonPrimary type="button" onClick={handleCreate} padding={"12px 24px"}>Cadastrar pessoa</ButtonPrimary>
+        <ButtonPrimary type="button" onClick={navigateCreate} padding={"12px 24px"}>Cadastrar pessoa</ButtonPrimary>
       </ListTitle>
 
       <List>

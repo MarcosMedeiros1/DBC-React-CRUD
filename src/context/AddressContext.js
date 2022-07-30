@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { apiDbc } from "../api";
 
 const AddressContext = createContext();
@@ -17,6 +17,34 @@ const AddressProvider = ({ children }) => {
       return data;
     } catch (error) {
       alert(error);
+    }
+  }
+
+  useEffect(() => {
+    idPerson && getAddress();
+  }, [])
+
+  const handleCreate = async (values) => {
+    console.log(values);
+    try {
+      await apiDbc.post(`/endereco/{idPessoa}?idPessoa=${idPerson}`, values);
+      alert("Endereço cadastrado com sucesso");
+      window.location.href = `/enderecos/${idPerson}`;
+    } catch (error) {
+      alert(error);
+    }
+  }
+
+  const navigateUpdate = (idAddress) => {
+    window.location.href = `/editar-endereco/${idPerson}/${idAddress}`;
+  }
+
+  const handleUpdate = async (values, idAddress) => {
+    try {
+      await apiDbc.put(`/endereco/${idAddress}`, values);
+      window.location.href = `/enderecos/${idPerson}`;
+    } catch (error) {
+      alert(error)
     }
   }
 
@@ -40,10 +68,14 @@ const AddressProvider = ({ children }) => {
     <AddressContext.Provider value={{
       address,
       getAddress,
+      handleCreate,
       handleDelete,
       confirmDelete,
       isModalVisible,
       setIsModalVisible,
+      setIdPerson,
+      navigateUpdate,
+      handleUpdate
     }}>{children}</AddressContext.Provider>
   )
 }

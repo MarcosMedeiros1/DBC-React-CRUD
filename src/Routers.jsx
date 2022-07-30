@@ -28,8 +28,8 @@ const Routers = () => {
               <Route path="/editar-pessoa/:id" element={<FormPeople />} />
 
               <Route path="/enderecos/:id" element={<Address />} />
-              <Route path="/cadastrar-endereco/:id" element={<FormAddress />} />
-              <Route path="/editar-endereco/:id" element={<FormAddress />} />
+              <Route path="/cadastrar-endereco/:idPerson" element={<FormAddress />} />
+              <Route path="/editar-endereco/:idPerson/:idAddress" element={<FormAddress />} />
             </>)}
           <Route path="*" element={<NotFound />} />
         </Routes>

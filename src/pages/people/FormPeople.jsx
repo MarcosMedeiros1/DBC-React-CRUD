@@ -1,5 +1,5 @@
 import MaskedInput from "react-text-mask";
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { FormDiv, FormItem, ErrorMessage, FormContainer, FormSection, TitleDiv } from "../../components/form/Form";
@@ -34,11 +34,12 @@ const SignupSchema = Yup.object().shape({
     .required("Campo obrigatório"),
 });
 
-const FormPeople = ({ }) => {
+const FormPeople = () => {
   const { id } = useParams();
   const { handleCreate, handleUpdate } = useContext(PeopleContext);
   const [pessoa, setPessoa] = useState({});
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   const setup = async () => {
     try {
@@ -78,7 +79,7 @@ const FormPeople = ({ }) => {
               values.cpf = OnlyNumbers(values.cpf);
               id ? handleUpdate(values, id) : handleCreate(values);
               resetForm({ value: "" });
-              setTimeout(() => { window.location.href = "/pessoas"; }, 1000)
+              setTimeout(() => { navigate("/pessoas") }, 1000)
             }}
           >
             {({ errors, touched }) => (
@@ -133,7 +134,7 @@ const FormPeople = ({ }) => {
 
                   <FormItem>
                     <div>
-                      <ButtonSecondary type="button" padding={"12px 32px"} onClick={() => window.location.href = '/pessoas'}>Cancelar</ButtonSecondary>
+                      <ButtonSecondary type="button" padding={"12px 32px"} onClick={() => navigate('/pessoas')}>Cancelar</ButtonSecondary>
 
                       <ButtonPrimary type="submit" padding={"12px 32px"}>{id ? "Atualizar" : "Cadastrar"}</ButtonPrimary>
                     </div>

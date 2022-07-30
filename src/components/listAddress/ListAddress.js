@@ -1,16 +1,17 @@
 import { useContext } from "react";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AddressContext } from "../../context/AddressContext";
 import { ButtonPrimary, DefaultButton } from "../button/Button";
-import { ContainerList, List, ListHeader, ListItem, ListTitle } from "../listPeople/ListPeople.styled";
+import { ContainerList, List, ListHeader, ListItem, ListTitle } from "../list/List";
 import Modal from "../modal/Modal";
 
 const ListAddress = ({ list, id }) => {
   const { handleDelete, confirmDelete, navigateUpdate, isModalVisible, setIsModalVisible } = useContext(AddressContext);
+  const navigate = useNavigate();
 
-  const handleCreate = () => {
-    Navigate(`/cadastrar-endereço${id}`);
+  const navigateCreate = () => {
+    navigate(`/cadastrar-endereco/${id}`);
   }
 
   return (
@@ -25,7 +26,7 @@ const ListAddress = ({ list, id }) => {
 
       <ListTitle>
         <h2>Endereços</h2>
-        <ButtonPrimary type="button" onClick={handleCreate} padding={"12px 24px"}>Cadastrar endereço</ButtonPrimary>
+        <ButtonPrimary type="button" onClick={navigateCreate} padding={"12px 24px"}>Cadastrar endereço</ButtonPrimary>
       </ListTitle>
 
       <List>
