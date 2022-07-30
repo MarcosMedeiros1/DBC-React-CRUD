@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledNotFound = styled.h1`
+export const StyledNotFound = styled.div`
   display: grid;
   gap: 16px;
   justify-items: center;
@@ -11,6 +11,7 @@ export const StyledNotFound = styled.h1`
     color: #000;
     text-decoration: none;
     position: relative;
+    font-size: 2rem;
   }
 
   & a::after{

@@ -36,34 +36,17 @@ const AuthProvider = ({ children }) => {
     apiDbc.defaults.headers.common["Authorization"] = undefined;
     setAuth(false);
     window.location.href = '/'
-
   };
 
-  const handleRegister = async (link, values, type, method) => {
-    if (method === "post") {
-      try {
-        await apiDbc.post(link, values);
-
-        alert(`${type} cadastrado(a) com sucesso`)
-
-        if (type === "Usuário") {
-          window.location.href = '/'
-        }
-      } catch (error) {
-        alert(error);
-      }
+  const handleRegister = async (values) => {
+    try {
+      await apiDbc.post('/auth/create', values);
+      alert('Cadastrado com sucesso')
+      window.location.href = '/';
+    } catch (error) {
+      alert(error)
     }
-
-    if (method === "put") {
-      try {
-        await apiDbc.put(link, values);
-
-        alert(`${type} editado(a) com sucesso`)
-      } catch (error) {
-        alert(error);
-      }
-    }
-  };
+  }
 
   if (loading) {
     return (<Loading></Loading>)

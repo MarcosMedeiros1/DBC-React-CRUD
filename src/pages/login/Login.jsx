@@ -2,9 +2,9 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { FormContainer, FormSection, TitleDiv, Title, SubTitle, FormDiv, FormItem, ErrorMessage } from "../../styles/FormDefault.styled";
+import { FormContainer, FormSection, TitleDiv, Title, SubTitle, FormDiv, FormItem, ErrorMessage } from "../../components/form/Form";
 import { ButtonPrimary } from "../../components/button/Button";
-import Header from '../../components/header/Header';
+import { Link } from "react-router-dom";
 
 const SignupSchema = Yup.object().shape({
   login: Yup.string()
@@ -22,12 +22,11 @@ const Login = () => {
 
   return (
     <>
-      <Header />
       <FormContainer>
         <FormSection>
 
           <TitleDiv>
-            <Title>Realizar login</Title>
+            <h1>Realizar login</h1>
             <SubTitle>Informe seu login e senha abaixo</SubTitle>
           </TitleDiv>
           <Formik
@@ -56,6 +55,7 @@ const Login = () => {
                   </FormItem>
 
                   <ButtonPrimary padding={"16px 32px"} type="submit">Entrar</ButtonPrimary>
+                  <span>Não possui uma conta? <Link to={"/cadastrar-usuario"}>Cadastrar</Link></span>
                 </FormDiv>
               </Form>
             )}

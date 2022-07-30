@@ -1,57 +1,78 @@
 import styled from "styled-components";
+import { backgroundDark, primaryColor, textLight } from "../../utils/colors";
 
 export const FormContainer = styled.div`
   display: grid;
-  grid-template-columns: 380px;
   justify-content: center;
   align-items: center;
+  position: relative;
+  grid-template-columns: 380px;
+  padding: 16px;
   height: 100vh;
-  background-color: #363740;
+  background-color: ${backgroundDark};
 `
 
 export const FormSection = styled.section`
-  padding: 40px 32px;
+  padding: 32px;
   background-color: #fff;
   border-radius: 8px;
+  border: 1px solid #DFE0EB;
 `
 
 export const TitleDiv = styled.div`
 display: grid;
 gap: 12px;
-margin-bottom: 48px;
+margin-bottom: 32px;
 text-align: center;
 `
 
-export const Title = styled.h1`
-  color: #252733;
-`;
-
 export const SubTitle = styled.span`
- color: #9FA2B4;
+ color: ${textLight};
 `
 
 export const FormDiv = styled.div`
   display: grid;
-  gap: 24px;
+  gap: 16px;
+
+  & span{
+    text-align: center;
+
+    & a{
+      color: ${primaryColor};
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    & a:hover{
+      text-decoration: underline;
+    }
+  }
 `
 
 export const FormItem = styled.div`
   display: grid;
   align-content: start;
   gap: 6px;
-  color: #9FA2B4;
+  color: ${textLight};
+  
   & input{
     background-color: #FCFDFE;
-    border: 1px solid #9FA2B4;
+    border: 1px solid ${textLight};
     border-radius: 8px;
     padding: 12px 16px;
   }
+
   & input::placeholder{
-    color: #9FA2B4;
+    color: ${textLight};
+  }
+
+  & div{
+    display: flex;
+    justify-content: space-between;
   }
 `
 
 export const ErrorMessage = styled.span`
   color: #F12B2C;
-  font-size: 12px;
+  font-size: 14px;
 `

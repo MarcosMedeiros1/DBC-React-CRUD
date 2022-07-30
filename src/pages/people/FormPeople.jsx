@@ -2,10 +2,9 @@ import MaskedInput from "react-text-mask";
 import { useParams } from "react-router-dom"
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { FormDiv, FormItem, ErrorMessage } from "../../styles/FormDefault.styled";
-import { ButtonPrimary } from "../../components/button/Button";
+import { FormDiv, FormItem, ErrorMessage, FormContainer, FormSection, TitleDiv } from "../../components/form/Form";
+import { ButtonPrimary, ButtonSecondary } from "../../components/button/Button";
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../context/AuthContext";
 import { PeopleContext } from "../../context/PeopleContext";
 import { apiDbc } from "../../api";
 import { Loading } from "../../components/loading/Loading";
@@ -35,12 +34,10 @@ const SignupSchema = Yup.object().shape({
     .required("Campo obrigatório"),
 });
 
-const FormPeople = () => {
+const FormPeople = ({ }) => {
   const { id } = useParams();
-  const { handleRegister } = useContext(AuthContext);
-  const { method, setMethod } = useContext(PeopleContext);
+  const { handleCreate, handleUpdate } = useContext(PeopleContext);
   const [pessoa, setPessoa] = useState({});
-  const [endpoint, setEndpoint] = useState("/pessoa");
   const [loading, setLoading] = useState(true);
 
   const setup = async () => {
@@ -48,8 +45,6 @@ const FormPeople = () => {
       const { data } = await apiDbc.get(`/pessoa/lista-completa?idPessoa=${id}`);
       setPessoa(data[0]);
       setLoading(false);
-      setMethod("put");
-      setEndpoint(`/pessoa/${id}`);
     } catch (error) {
       alert(error);
     }
@@ -64,82 +59,94 @@ const FormPeople = () => {
   }
 
   return (
-    <div>
-      <Formik initialValues={{
-        nome: id ? pessoa.nome : "",
-        dataNascimento: id ? FormatDateUsaToBr(pessoa.dataNascimento) : "",
-        cpf: id ? OnlyNumbers(pessoa.cpf) : "",
-        email: id ? pessoa.email : "",
-      }}
-        validationSchema={SignupSchema}
-        onSubmit={(values, { resetForm }) => {
-          values.dataNascimento = FormatDateBrToUsa(values.dataNascimento);
-          values.cpf = OnlyNumbers(values.cpf);
-          // handleRegister(endpoint, values, "Pessoa", method);
-          // setMethod("post");
-          // resetForm({ value: "" });
-          // window.location.href = "/pessoas"; // Problema ao editar pessoa (não edita da primeira vez)
-        }}
-      >
-        {({ errors, touched }) => (
-          <Form>
-            <FormDiv>
-              <FormItem>
-                <Field name="nome" placeholder="Nome" />
-                {errors.nome && touched.nome ? (
-                  <ErrorMessage>{errors.nome}</ErrorMessage>
-                ) : null}
-              </FormItem>
+    <>
+      <FormContainer>
+        <FormSection>
+          <TitleDiv>
+            <h1>Cadastrar pessoa</h1>
+          </TitleDiv>
 
-              <FormItem>
-                <Field name="dataNascimento" >
-                  {({ field }) => (
-                    <MaskedInput
-                      {...field}
-                      mask={dateMask}
-                      placeholder="Data de nascimento"
-                      type="text"
-                    />
-                  )}
-                </Field>
-                {errors.dataNascimento && touched.dataNascimento ? (
-                  <ErrorMessage>{errors.dataNascimento}</ErrorMessage>
-                ) : null}
-              </FormItem>
+          <Formik initialValues={{
+            nome: id ? pessoa.nome : "",
+            dataNascimento: id ? FormatDateUsaToBr(pessoa.dataNascimento) : "",
+            cpf: id ? OnlyNumbers(pessoa.cpf) : "",
+            email: id ? pessoa.email : "",
+          }}
+            validationSchema={SignupSchema}
+            onSubmit={(values, { resetForm }) => {
+              values.dataNascimento = FormatDateBrToUsa(values.dataNascimento);
+              values.cpf = OnlyNumbers(values.cpf);
+              id ? handleUpdate(values, id) : handleCreate(values);
+              resetForm({ value: "" });
+              setTimeout(() => { window.location.href = "/pessoas"; }, 1000)
+            }}
+          >
+            {({ errors, touched }) => (
+              <Form>
+                <FormDiv>
+                  <FormItem>
+                    <Field name="nome" placeholder="Nome" />
+                    {errors.nome && touched.nome ? (
+                      <ErrorMessage>{errors.nome}</ErrorMessage>
+                    ) : null}
+                  </FormItem>
 
-              <FormItem>
-                <Field name="cpf"  >
-                  {({ field }) => (
-                    <MaskedInput
-                      {...field}
-                      mask={cpfMask}
-                      placeholder="CPF"
-                      type="text"
-                    />
-                  )}
+                  <FormItem>
+                    <Field name="dataNascimento" >
+                      {({ field }) => (
+                        <MaskedInput
+                          {...field}
+                          mask={dateMask}
+                          placeholder="Data de nascimento"
+                          type="text"
+                        />
+                      )}
+                    </Field>
+                    {errors.dataNascimento && touched.dataNascimento ? (
+                      <ErrorMessage>{errors.dataNascimento}</ErrorMessage>
+                    ) : null}
+                  </FormItem>
 
-                </Field>
-                {errors.cpf && touched.cpf ? (
-                  <ErrorMessage>{errors.cpf}</ErrorMessage>
-                ) : null}
-              </FormItem>
+                  <FormItem>
+                    <Field name="cpf"  >
+                      {({ field }) => (
+                        <MaskedInput
+                          {...field}
+                          mask={cpfMask}
+                          placeholder="CPF"
+                          type="text"
+                        />
+                      )}
 
-              <FormItem>
-                <Field name="email" placeholder="Email" type="email" />
-                {errors.email && touched.email ? (
-                  <ErrorMessage>{errors.email}</ErrorMessage>
-                ) : null}
-              </FormItem>
+                    </Field>
+                    {errors.cpf && touched.cpf ? (
+                      <ErrorMessage>{errors.cpf}</ErrorMessage>
+                    ) : null}
+                  </FormItem>
 
-              <FormItem>
-                <ButtonPrimary padding={"16px 32px"}>{id ? "Atualizar" : "Cadastrar"}</ButtonPrimary>
-              </FormItem>
+                  <FormItem>
+                    <Field name="email" placeholder="Email" type="email" />
+                    {errors.email && touched.email ? (
+                      <ErrorMessage>{errors.email}</ErrorMessage>
+                    ) : null}
+                  </FormItem>
 
-            </FormDiv>
-          </Form>
-        )}
-      </Formik>
-    </div >
+                  <FormItem>
+                    <div>
+                      <ButtonSecondary type="button" padding={"12px 32px"} onClick={() => window.location.href = '/pessoas'}>Cancelar</ButtonSecondary>
+
+                      <ButtonPrimary type="submit" padding={"12px 32px"}>{id ? "Atualizar" : "Cadastrar"}</ButtonPrimary>
+                    </div>
+                  </FormItem>
+
+                </FormDiv>
+              </Form>
+            )}
+          </Formik>
+
+        </FormSection>
+      </FormContainer>
+    </>
   )
 }
 export default FormPeople;

@@ -1,12 +1,13 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { FaTrashAlt, FaUserEdit } from 'react-icons/fa';
 import { PeopleContext } from "../../context/PeopleContext";
-import { ButtonPrimary, ButtonSecondary } from "../button/Button";
+import { ButtonPrimary, ButtonSecondary, DefaultButton } from "../button/Button";
 import Modal from "../modal/Modal";
 import { ContainerList, List, ListHeader, ListItem, TitleList, Ul } from "./ListPeople.styled"
 
 const ListPeople = ({ list }) => {
-  const { handleDelete, confirmDelete, handleUpdate, isModalVisible, setIsModalVisible } = useContext(PeopleContext);
+  const { handleDelete, confirmDelete, navigateUpdate, isModalVisible, setIsModalVisible } = useContext(PeopleContext);
   const navigate = useNavigate();
 
   const handleCreate = () => {
@@ -22,11 +23,12 @@ const ListPeople = ({ list }) => {
           <h2>Confirmar exclusão?</h2>
         </Modal>}
 
+      <TitleList>
+        <h2>Pessoas</h2>
+        <ButtonPrimary type="button" onClick={handleCreate} padding={"12px 24px"}>Cadastrar pessoa</ButtonPrimary>
+      </TitleList>
+
       <List>
-        <TitleList>
-          <h2>Pessoas</h2>
-          <ButtonPrimary type="button" onClick={handleCreate} padding={"6px 8px"}>Cadastrar</ButtonPrimary>
-        </TitleList>
         <ListHeader>
           <span>Nome</span>
           <span>Data de nascimento</span>
@@ -43,9 +45,16 @@ const ListPeople = ({ list }) => {
               <span>{item.email}</span>
 
               <div>
-                <ButtonSecondary type="button" padding={"6px 8px"} onClick={() => handleDelete(item.idPessoa)}>Excluir</ButtonSecondary>
+                <DefaultButton type="button" hoverColor={"#F12B2C"} onClick={() => handleDelete(item.idPessoa)}>
+                  <FaTrashAlt />
+                </DefaultButton>
 
-                <ButtonSecondary type="button" padding={"6px 8px"} onClick={() => handleUpdate(item.idPessoa)}>Editar</ButtonSecondary >
+
+                <DefaultButton type="button" hoverColor={"#f39c12"} onClick={() => navigateUpdate(item.idPessoa)}>
+                  <FaUserEdit />
+                </DefaultButton >
+
+                <ButtonSecondary type="button" padding={"6px 12px"}>Endereços</ButtonSecondary>
               </div>
             </ListItem>
           ))

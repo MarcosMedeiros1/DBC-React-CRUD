@@ -3,8 +3,8 @@ import * as Yup from "yup";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { ButtonPrimary } from "../../components/button/Button";
-import { FormContainer, FormSection, TitleDiv, Title, SubTitle, FormDiv, FormItem, ErrorMessage } from "../../styles/FormDefault.styled";
-import Header from '../../components/header/Header';
+import { FormContainer, FormSection, TitleDiv, Title, SubTitle, FormDiv, FormItem, ErrorMessage } from "../../components/form/Form";
+import { Link } from "react-router-dom";
 
 const SignupSchema = Yup.object().shape({
   login: Yup.string()
@@ -21,11 +21,10 @@ const Users = () => {
   const { handleRegister } = useContext(AuthContext);
   return (
     <>
-      <Header />
       <FormContainer>
         <FormSection>
           <TitleDiv>
-            <Title>Cadastrar usuario</Title>
+            <h1>Cadastrar usuario</h1>
             <SubTitle>Informe o login e senha para cadastro</SubTitle>
           </TitleDiv>
           <Formik
@@ -35,7 +34,7 @@ const Users = () => {
             }}
             validationSchema={SignupSchema}
             onSubmit={(values) => {
-              handleRegister("/auth/create", values, "Usuário", "post");
+              handleRegister(values);
             }}
           >
             {({ errors, touched }) => (
@@ -54,6 +53,7 @@ const Users = () => {
                   </FormItem>
 
                   <ButtonPrimary padding={"16px 32px"} type="submit">Cadastrar</ButtonPrimary>
+                  <span>Já possui uma conta? <Link to={"/"}>Fazer Login</Link></span>
                 </FormDiv>
               </Form>
             )}

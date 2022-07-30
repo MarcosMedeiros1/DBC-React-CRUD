@@ -8,7 +8,6 @@ const PeopleContext = createContext();
 const PeopleProvider = ({ children }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [idPessoa, setIdPessoa] = useState("");
-  const [method, setMethod] = useState("post");
   const [pessoas, setPessoas] = useState([]);
   const [loading, setLoading] = useState(true);
   const { auth } = useContext(AuthContext);
@@ -27,6 +26,16 @@ const PeopleProvider = ({ children }) => {
     auth ? setup() : setLoading(false);
   }, [])
 
+  const handleCreate = async (values) => {
+    try {
+      await apiDbc.post(`/pessoa`, values);
+      alert('Pessoa cadastrada com sucesso');
+      window.location.href = '/pessoa';
+    } catch (error) {
+      alert(error)
+    }
+  }
+
   const handleDelete = async (idPessoa) => {
     setIsModalVisible(true);
     setIdPessoa(idPessoa);
@@ -43,9 +52,17 @@ const PeopleProvider = ({ children }) => {
     }
   }
 
-  const handleUpdate = (idPessoa) => {
-    setMethod("put");
+  const navigateUpdate = (idPessoa) => {
     window.location.href = `/editar-pessoa/${idPessoa}`
+  }
+
+  const handleUpdate = async (values, idPessoa) => {
+    try {
+      await apiDbc.put(`/pessoa/${idPessoa}`, values)
+      window.location.href = '/pessoa';
+    } catch (error) {
+      alert(error)
+    }
   }
 
   if (loading) {
@@ -53,7 +70,16 @@ const PeopleProvider = ({ children }) => {
   }
 
   return (
-    <PeopleContext.Provider value={{ handleDelete, confirmDelete, handleUpdate, isModalVisible, setIsModalVisible, method, setMethod, pessoas }}>
+    <PeopleContext.Provider value={{
+      handleDelete,
+      confirmDelete,
+      handleUpdate,
+      navigateUpdate,
+      handleCreate,
+      isModalVisible,
+      setIsModalVisible,
+      pessoas
+    }}>
       {children}
     </PeopleContext.Provider>
   )

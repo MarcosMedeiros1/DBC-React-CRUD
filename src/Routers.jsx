@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Footer from "./components/footer/Footer";
 import Address from "./pages/address/Address";
 import Login from "./pages/login/Login";
 import People from "./pages/people/People";
@@ -19,7 +18,7 @@ const Routers = () => {
           {!auth ? (
             <>
               <Route path="/" element={<Login />} />
-              <Route path="/usuarios" element={<Users />} />
+              <Route path="/cadastrar-usuario" element={<Users />} />
             </>
           ) : (
             <>
@@ -30,7 +29,6 @@ const Routers = () => {
             </>)}
           <Route path="*" element={<NotFound />} />
         </Routes>
-        <Footer />
       </BrowserRouter>
     </>
   );
