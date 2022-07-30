@@ -36,7 +36,7 @@ const PeopleProvider = ({ children }) => {
     }
   }
 
-  const handleDelete = async (idPessoa) => {
+  const handleDelete = (idPessoa) => {
     setIsModalVisible(true);
     setIdPessoa(idPessoa);
   }
@@ -78,7 +78,7 @@ const PeopleProvider = ({ children }) => {
       handleCreate,
       isModalVisible,
       setIsModalVisible,
-      pessoas
+      pessoas,
     }}>
       {children}
     </PeopleContext.Provider>

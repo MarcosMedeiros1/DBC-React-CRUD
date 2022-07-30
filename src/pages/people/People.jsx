@@ -4,7 +4,6 @@ import { PeopleContext } from "../../context/PeopleContext";
 import { Container } from "../../components/container/Container";
 import Aside from "../../components/aside/Aside";
 
-
 const People = () => {
   const { pessoas } = useContext(PeopleContext);
 

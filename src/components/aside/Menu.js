@@ -16,8 +16,8 @@ const Menu = () => {
           </>
         ) : (
           <>
-            <Item name="Endereço" url="/endereco" />
             <Item name="Pessoas" url="/pessoas" />
+            <Item name="Endereços" url="/enderecos" />
             <Item name="Sair" url="" click={handleLogout}>Sair</Item>
           </>
         )}

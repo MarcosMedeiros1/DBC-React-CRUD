@@ -5,13 +5,16 @@ import { AuthProvider } from "./context/AuthContext";
 import { PeopleProvider } from "./context/PeopleContext";
 import Routers from "./Routers";
 import "./index.css";
+import { AddressProvider } from "./context/AddressContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <AuthProvider>
     <PeopleProvider>
-      <Routers />
+      <AddressProvider>
+        <Routers />
+      </AddressProvider>
     </PeopleProvider>
   </AuthProvider>
 );

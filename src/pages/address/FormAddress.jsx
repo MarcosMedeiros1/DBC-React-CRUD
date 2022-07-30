@@ -46,8 +46,7 @@ const SignupSchema = Yup.object().shape({
     .required("Campo obrigatório"),
 });
 
-
-const Address = () => {
+const FormAddress = () => {
   const { handleRegister } = useContext(AuthContext);
   const navigate = useNavigate();
   useEffect(() => {
@@ -168,4 +167,4 @@ const Address = () => {
   )
 };
 
-export default Address;
+export default FormAddress;

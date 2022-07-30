@@ -4,14 +4,20 @@ import { FaTrashAlt, FaUserEdit } from 'react-icons/fa';
 import { PeopleContext } from "../../context/PeopleContext";
 import { ButtonPrimary, ButtonSecondary, DefaultButton } from "../button/Button";
 import Modal from "../modal/Modal";
-import { ContainerList, List, ListHeader, ListItem, TitleList, Ul } from "./ListPeople.styled"
+import { ContainerList, List, ListHeader, ListItem, ListTitle } from "./ListPeople.styled"
+import { FormatDateUsaToBr } from "../../utils/utils";
 
 const ListPeople = ({ list }) => {
   const { handleDelete, confirmDelete, navigateUpdate, isModalVisible, setIsModalVisible } = useContext(PeopleContext);
+
   const navigate = useNavigate();
 
   const handleCreate = () => {
     navigate('/cadastrar-pessoa');
+  }
+
+  const navigateAddress = (id) => {
+    navigate(`/enderecos/${id}`)
   }
 
   return (
@@ -23,10 +29,10 @@ const ListPeople = ({ list }) => {
           <h2>Confirmar exclusão?</h2>
         </Modal>}
 
-      <TitleList>
+      <ListTitle>
         <h2>Pessoas</h2>
         <ButtonPrimary type="button" onClick={handleCreate} padding={"12px 24px"}>Cadastrar pessoa</ButtonPrimary>
-      </TitleList>
+      </ListTitle>
 
       <List>
         <ListHeader>
@@ -36,11 +42,11 @@ const ListPeople = ({ list }) => {
           <span>Email</span>
           <span>Ações</span>
         </ListHeader>
-        <Ul>
+        <ul>
           {list.map(item => (
             <ListItem key={item.idPessoa}>
               <span>{item.nome}</span>
-              <span>{item.dataNascimento.split("-").reverse().join("/")}</span>
+              <span>{FormatDateUsaToBr(item.dataNascimento)}</span>
               <span>{item.cpf}</span>
               <span>{item.email}</span>
 
@@ -49,19 +55,19 @@ const ListPeople = ({ list }) => {
                   <FaTrashAlt />
                 </DefaultButton>
 
-
                 <DefaultButton type="button" hoverColor={"#f39c12"} onClick={() => navigateUpdate(item.idPessoa)}>
                   <FaUserEdit />
                 </DefaultButton >
 
-                <ButtonSecondary type="button" padding={"6px 12px"}>Endereços</ButtonSecondary>
+                <ButtonSecondary type="button" padding={"6px 12px"} onClick={() => navigateAddress(item.idPessoa)}>Endereços</ButtonSecondary>
               </div>
             </ListItem>
           ))
           }
-        </Ul>
+        </ul>
       </List>
     </ContainerList>
   )
 }
+
 export default ListPeople;
