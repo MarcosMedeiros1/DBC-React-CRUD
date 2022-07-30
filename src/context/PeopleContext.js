@@ -59,7 +59,7 @@ const PeopleProvider = ({ children }) => {
   const handleUpdate = async (values, idPessoa) => {
     try {
       await apiDbc.put(`/pessoa/${idPessoa}`, values)
-      window.location.href = '/pessoa';
+      window.location.href = '/pessoas';
     } catch (error) {
       alert(error)
     }

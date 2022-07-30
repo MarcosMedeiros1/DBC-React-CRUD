@@ -39,7 +39,7 @@ const AddressProvider = ({ children }) => {
     window.location.href = `/editar-endereco/${idPerson}/${idAddress}`;
   }
 
-  const handleUpdate = async (values, idAddress) => {
+  const handleUpdate = async (values, idAddress, idPerson) => {
     try {
       await apiDbc.put(`/endereco/${idAddress}`, values);
       window.location.href = `/enderecos/${idPerson}`;
