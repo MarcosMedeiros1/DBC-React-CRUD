@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import ListAddress from "../../components/listAddress/ListAddress";
 import { Container } from "../../components/container/Container";
-import Aside from "../../components/aside/Aside";
+import Header from "../../components/header/Header";
 import { useParams } from "react-router-dom";
 import { AddressContext } from "../../context/AddressContext";
 
@@ -15,7 +15,7 @@ const Address = () => {
 
   return (
     <Container>
-      <Aside />
+      <Header visibility={'visible'} page={" - Endereços"} />
       <div>
         <ListAddress list={address} id={id} />
       </div>

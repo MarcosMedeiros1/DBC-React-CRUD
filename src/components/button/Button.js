@@ -21,9 +21,12 @@ export const DefaultButton = styled.button`
 `
 
 export const ButtonPrimary = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: ${primaryColor};
   color: ${secondaryColor};
-  font-size: 14px;
+  font-size: ${(props) => props.fontSize};
   border: 1px solid ${primaryColor};
   border-radius: 8px;
   padding: ${(props) => props.padding};
@@ -39,9 +42,13 @@ export const ButtonPrimary = styled.button`
 `
 
 export const ButtonSecondary = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   background-color: ${secondaryColor};
   color: ${primaryColor};
-  font-size: 14px;
+  font-size: ${(props) => props.fontSize};
   border: 1px solid ${primaryColor};
   border-radius: 8px;
   padding: ${(props) => props.padding};

@@ -99,7 +99,7 @@ const FormAddress = () => {
     <FormContainer>
       <FormSection>
         <TitleDiv>
-          <h1>Cadastrar endereço</h1>
+          <h1>{idAddress ? "Atualizar endereço" : "Cadastrar endereço"}</h1>
         </TitleDiv>
         <Formik
           initialValues={{
@@ -186,7 +186,7 @@ const FormAddress = () => {
                   <div>
                     <ButtonSecondary type="button" padding={"12px 32px"} onClick={() => navigate(`/enderecos/${idPerson}`)}>Cancelar</ButtonSecondary>
 
-                    <ButtonPrimary padding={"16px 32px"} type="submit">Cadastrar</ButtonPrimary>
+                    <ButtonPrimary padding={"16px 32px"} type="submit">{idAddress ? "Atualizar" : "Cadastrar"}</ButtonPrimary>
                   </div>
                 </FormItem>
               </FormDiv>

@@ -1,9 +1,10 @@
 import { useContext } from "react";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import { BsCardText } from 'react-icons/bs'
 import { useNavigate } from "react-router-dom";
 import { AddressContext } from "../../context/AddressContext";
-import { ButtonPrimary, DefaultButton } from "../button/Button";
-import { ContainerList, InfoAddress, List, ListItem, ListTitle } from "../list/List";
+import { ButtonSecondary, DefaultButton } from "../button/Button";
+import { ContainerList, InfoAddress, List, ListItem, ListAdd } from "../list/List";
 import Modal from "../modal/Modal";
 
 const ListAddress = ({ list, id }) => {
@@ -14,13 +15,27 @@ const ListAddress = ({ list, id }) => {
     navigate(`/cadastrar-endereco/${id}`);
   }
 
-  return (
-    <ContainerList>
+  if (list.length === 0) {
+    return (
+      <ContainerList justify={"center"}>
 
-      <ListTitle>
-        <h2>Endereços</h2>
-        <ButtonPrimary type="button" onClick={navigateCreate} padding={"12px 24px"}>Cadastrar endereço</ButtonPrimary>
-      </ListTitle>
+        <ListAdd>
+          <ButtonSecondary type="button" onClick={navigateCreate} padding={"12px 24px"} fontSize={"1rem"}>Cadastrar endereço <BsCardText /></ButtonSecondary>
+        </ListAdd>
+
+        <h2>Nenhum endereço cadastradado</h2>
+      </ContainerList>
+    )
+  }
+
+  return (
+    <ContainerList justify={"center"}>
+
+
+      <ListAdd>
+        <ButtonSecondary type="button" onClick={navigateCreate} padding={"12px 24px"} fontSize={"1rem"}>Cadastrar endereço <BsCardText /></ButtonSecondary>
+      </ListAdd>
+
 
 
       {isModalVisible &&

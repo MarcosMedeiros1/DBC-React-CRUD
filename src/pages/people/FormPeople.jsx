@@ -63,7 +63,7 @@ const FormPeople = () => {
     <FormContainer>
       <FormSection>
         <TitleDiv>
-          <h1>Cadastrar pessoa</h1>
+          <h1>{id ? "Atualizar pessoa" : "Cadastrar pessoa"}</h1>
         </TitleDiv>
 
         <Formik initialValues={{

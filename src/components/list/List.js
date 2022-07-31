@@ -1,29 +1,31 @@
 import styled from "styled-components";
-import { backgroundLight, textLight } from "../../utils/colors";
+import { backgroundDark, backgroundLight, textLight } from "../../utils/colors";
 
 export const ContainerList = styled.section`
   display: grid;
-  justify-content: center;
+  justify-content: ${(props) => props.justify};
   align-content: start;
   gap: 32px;
-  padding: 24px 32px;
+  padding: 32px;
   height: 100%;
-  background-color: ${backgroundLight};
+  background-color: ${backgroundDark};
+
+  & h2{
+  color: #fff;
+  text-align: center;
+  }
 `
 
 export const List = styled.div`
   display: grid;
-  justify-content: center;
   border-radius: 8px;
   background-color: #fff;
   border: 1px solid #DFE0EB;
 `
 
-export const ListTitle = styled.div`
+export const ListAdd = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 64px;
+  justify-content: center;
 `
 
 export const ListHeader = styled.div`
@@ -32,7 +34,7 @@ export const ListHeader = styled.div`
   grid-template-columns: repeat(5, 1fr);
   gap: 24px;
   color: ${textLight};
-  padding: 16px;
+  padding: 16px 24px;
   border-bottom: 1px solid #DFE0EB;
 
 `
@@ -42,7 +44,7 @@ export const ListItem = styled.li`
   align-items: center;
   gap: 24px;
   grid-template-columns: ${(props) => props.columns};
-  padding: 24px 16px 24px;
+  padding: 24px;
   border-top: 1px solid #DFE0EB;
   list-style: none;
 
@@ -52,28 +54,28 @@ export const ListItem = styled.li`
   
   :first-child{
     border-top: none;
+    border-radius: 8px 8px 0 0;
   }
 
   :last-child{
     border-radius: 0 0 8px 8px;
   }
 
-& div{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-}
+  & div{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
 `
 
 export const InfoPerson = styled.span`
-  max-width: 200px;
+  /* max-width: 200px;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
+  text-overflow: ellipsis; */
+  line-break: auto;
 `
 
 export const InfoAddress = styled.span`
-  min-width: 320px;
   line-break: auto;
 `

@@ -6,15 +6,15 @@ export const StyledNotFound = styled.div`
   justify-items: center;
   align-content: center;
   height: 100vh;
+  color: #fff;
 
   & a{
-    color: #000;
+    color: #fff;
     text-decoration: none;
     position: relative;
     font-size: 2rem;
-  }
 
-  & a::after{
+  ::after{
     content: '';
     position: absolute;
     height: 2px;
@@ -23,12 +23,13 @@ export const StyledNotFound = styled.div`
     bottom: 0;
     opacity: 0;
     transform: translateY(3px);
-    background: #000;
+    background: #fff;
     transition: opacity 0.2s ease, transform 0.2s ease;
   }
 
-  & a:hover::after{
+  :hover::after{
     opacity: 1;
     transform: translateY(0);
   }
+}
 `

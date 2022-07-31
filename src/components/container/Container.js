@@ -2,7 +2,5 @@ import styled from "styled-components";
 
 export const Container = styled.section`
   display: grid;
-  grid-template-columns: 1fr 5fr;
-  justify-content: center;
-  height: 100vh;
+  grid-template-rows: 2fr 100vh;
 `

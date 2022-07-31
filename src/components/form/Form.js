@@ -12,7 +12,7 @@ export const FormContainer = styled.div`
 `
 
 export const FormSection = styled.section`
-  padding: 16px 32px;
+  padding:  32px;
   background-color: #fff;
   border-radius: 8px;
   border: 1px solid #DFE0EB;
@@ -40,10 +40,10 @@ export const FormDiv = styled.div`
       color: ${primaryColor};
       text-decoration: none;
       font-weight: 600;
-    }
 
-    & a:hover{
+      :hover{
       text-decoration: underline;
+      }
     }
   }
 `

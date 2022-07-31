@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaTrashAlt, FaUserEdit } from 'react-icons/fa';
+import { FaTrashAlt, FaUserEdit, FaUserPlus } from 'react-icons/fa';
 import { PeopleContext } from "../../context/PeopleContext";
-import { ButtonPrimary, ButtonSecondary, DefaultButton } from "../button/Button";
+import { ButtonSecondary, DefaultButton } from "../button/Button";
 import Modal from "../modal/Modal";
-import { ContainerList, Info, InfoPerson, List, ListHeader, ListItem, ListTitle } from "../list/List"
+import { ContainerList, InfoPerson, List, ListHeader, ListItem, ListAdd } from "../list/List"
 import { FormatDateUsaToBr } from "../../utils/utils";
 
 const ListPeople = ({ list }) => {
@@ -20,8 +20,21 @@ const ListPeople = ({ list }) => {
     navigate(`/enderecos/${id}`)
   }
 
+  if (list.length === 0) {
+    return (
+      <ContainerList justify={"center"}>
+
+        <ListAdd>
+          <ButtonSecondary type="button" onClick={navigateCreate} padding={"12px 24px"} fontSize={"1rem"}>Cadastrar pessoa <FaUserPlus /></ButtonSecondary>
+        </ListAdd>
+
+        <h2>Nenhuma pessoa cadastrada</h2>
+      </ContainerList>
+    )
+  }
+
   return (
-    <ContainerList>
+    <ContainerList justify={""}>
       {isModalVisible &&
         <Modal
           onCancel={() => setIsModalVisible(false)}
@@ -29,10 +42,9 @@ const ListPeople = ({ list }) => {
           <h2>Confirmar exclusão?</h2>
         </Modal>}
 
-      <ListTitle>
-        <h2>Pessoas</h2>
-        <ButtonPrimary type="button" onClick={navigateCreate} padding={"12px 24px"}>Cadastrar pessoa</ButtonPrimary>
-      </ListTitle>
+      <ListAdd>
+        <ButtonSecondary type="button" onClick={navigateCreate} padding={"12px 24px"} fontSize={"1rem"}>Cadastrar pessoa <FaUserPlus /></ButtonSecondary>
+      </ListAdd>
 
       <List>
         <ListHeader>
@@ -59,7 +71,7 @@ const ListPeople = ({ list }) => {
                   <FaUserEdit />
                 </DefaultButton >
 
-                <ButtonSecondary type="button" padding={"6px 12px"} onClick={() => navigateAddress(item.idPessoa)}>Endereços</ButtonSecondary>
+                <ButtonSecondary type="button" padding={"6px 12px"} fontSize={"14px"} onClick={() => navigateAddress(item.idPessoa)}>Endereços</ButtonSecondary>
               </div>
             </ListItem>
           ))
