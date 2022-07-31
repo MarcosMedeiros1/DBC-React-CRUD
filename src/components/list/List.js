@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { backgroundDark, backgroundLight, textLight } from "../../utils/colors";
+import { backgroundDark, backgroundLight, textLight } from "../../utils/utils";
 
 export const ContainerList = styled.section`
   display: grid;

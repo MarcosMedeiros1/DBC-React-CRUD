@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { primaryColor, secondaryColor } from "../../utils/colors";
+import { primaryColor, secondaryColor } from "../../utils/utils";
 
 export const DefaultButton = styled.button`
   display: flex;

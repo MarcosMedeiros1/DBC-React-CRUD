@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { backgroundDark, primaryColor, textLight } from "../../utils/colors";
+import { backgroundDark, primaryColor, textLight } from "../../utils/utils";
 
 export const FormContainer = styled.div`
   display: grid;

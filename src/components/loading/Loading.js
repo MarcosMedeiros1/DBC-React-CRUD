@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { backgroundDark } from "../../utils/colors"
+import { backgroundDark } from "../../utils/utils";
 
 export const Loading = styled.button`
   @keyframes donut-spin {

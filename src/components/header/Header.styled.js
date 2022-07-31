@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { backgroundDark, primaryColor, secondaryColor, textLight } from "../../utils/colors";
+import { backgroundDark, primaryColor, secondaryColor, textLight } from "../../utils/utils";
 
 export const HeaderContainer = styled.header`
   display: flex;
