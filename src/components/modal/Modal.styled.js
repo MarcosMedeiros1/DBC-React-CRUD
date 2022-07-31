@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { backgroundLight } from "../../utils/utils";
 
 export const BackgroundModal = styled.div`
   width: 100%;
@@ -14,7 +15,7 @@ export const BackgroundModal = styled.div`
 `
 
 export const ContainerModal = styled.div`
-  background-color: #fff;
+  background-color: ${backgroundLight};
   color: #000;
   padding: 24px;
   border-radius: 4px;
@@ -22,6 +23,10 @@ export const ContainerModal = styled.div`
 
 export const TextModal = styled.div`
   margin-bottom: 16px;
+
+  & h2{
+    color: #000;
+  }
 `
 
 export const ButtonsModal = styled.div`
