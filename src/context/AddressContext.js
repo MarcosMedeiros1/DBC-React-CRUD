@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { apiDbc } from "../api";
+import { Loading } from "../components/loading/Loading";
 
 const AddressContext = createContext();
 
@@ -8,20 +9,21 @@ const AddressProvider = ({ children }) => {
   const [address, setAddress] = useState([]);
   const [idAddress, setIdAddress] = useState([]);
   const [idPerson, setIdPerson] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const getAddress = async (id) => {
     setIdPerson(id);
     try {
       const { data } = await apiDbc.get(`/endereco/retorna-por-id-pessoa?idPessoa=${id}`);
       setAddress(data);
-      return data;
+      setLoading(false);
     } catch (error) {
       alert(error);
     }
   }
 
   useEffect(() => {
-    idPerson && getAddress();
+    idPerson ? getAddress() : setLoading(false);
   }, [])
 
   const handleCreate = async (values) => {
@@ -61,6 +63,10 @@ const AddressProvider = ({ children }) => {
     } catch (error) {
       alert(error)
     }
+  }
+
+  if (loading) {
+    return (<Loading></Loading>)
   }
 
   return (

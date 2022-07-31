@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { backgroundDark } from "../../utils/colors"
 
 export const Loading = styled.button`
   @keyframes donut-spin {
@@ -9,12 +10,13 @@ export const Loading = styled.button`
       transform: rotate(360deg);
     }
   }
+  background-color: ${backgroundDark};
   display: inline-block;
   position: fixed;
   top: 50%;
   left: 50%;
-	border: 4px solid rgba(255, 255, 255, 0.1);
-	border-left-color: #000;
+	border: 4px solid ${backgroundDark};
+	border-left-color: #fff;
 	border-radius: 50%;
 	width: 40px;
 	height: 40px;

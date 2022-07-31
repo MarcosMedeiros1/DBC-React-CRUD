@@ -5,7 +5,6 @@ export const FormContainer = styled.div`
   display: grid;
   justify-content: center;
   align-items: center;
-  position: relative;
   grid-template-columns: 380px;
   padding: 16px;
   height: 100vh;
@@ -13,7 +12,7 @@ export const FormContainer = styled.div`
 `
 
 export const FormSection = styled.section`
-  padding: 32px;
+  padding: 16px 32px;
   background-color: #fff;
   border-radius: 8px;
   border: 1px solid #DFE0EB;

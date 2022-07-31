@@ -60,94 +60,92 @@ const FormPeople = () => {
   }
 
   return (
-    <>
-      <FormContainer>
-        <FormSection>
-          <TitleDiv>
-            <h1>Cadastrar pessoa</h1>
-          </TitleDiv>
+    <FormContainer>
+      <FormSection>
+        <TitleDiv>
+          <h1>Cadastrar pessoa</h1>
+        </TitleDiv>
 
-          <Formik initialValues={{
-            nome: id ? pessoa.nome : "",
-            dataNascimento: id ? FormatDateUsaToBr(pessoa.dataNascimento) : "",
-            cpf: id ? OnlyNumbers(pessoa.cpf) : "",
-            email: id ? pessoa.email : "",
+        <Formik initialValues={{
+          nome: id ? pessoa.nome : "",
+          dataNascimento: id ? FormatDateUsaToBr(pessoa.dataNascimento) : "",
+          cpf: id ? OnlyNumbers(pessoa.cpf) : "",
+          email: id ? pessoa.email : "",
+        }}
+          validationSchema={SignupSchema}
+          onSubmit={(values, { resetForm }) => {
+            values.dataNascimento = FormatDateBrToUsa(values.dataNascimento);
+            values.cpf = OnlyNumbers(values.cpf);
+            id ? handleUpdate(values, id) : handleCreate(values);
+            resetForm({ value: "" });
+            setTimeout(() => { navigate("/pessoas") }, 1000)
           }}
-            validationSchema={SignupSchema}
-            onSubmit={(values, { resetForm }) => {
-              values.dataNascimento = FormatDateBrToUsa(values.dataNascimento);
-              values.cpf = OnlyNumbers(values.cpf);
-              id ? handleUpdate(values, id) : handleCreate(values);
-              resetForm({ value: "" });
-              setTimeout(() => { navigate("/pessoas") }, 1000)
-            }}
-          >
-            {({ errors, touched }) => (
-              <Form>
-                <FormDiv>
-                  <FormItem>
-                    <Field name="nome" placeholder="Nome" />
-                    {errors.nome && touched.nome ? (
-                      <ErrorMessage>{errors.nome}</ErrorMessage>
-                    ) : null}
-                  </FormItem>
+        >
+          {({ errors, touched }) => (
+            <Form>
+              <FormDiv>
+                <FormItem>
+                  <Field name="nome" placeholder="Nome" />
+                  {errors.nome && touched.nome ? (
+                    <ErrorMessage>{errors.nome}</ErrorMessage>
+                  ) : null}
+                </FormItem>
 
-                  <FormItem>
-                    <Field name="dataNascimento" >
-                      {({ field }) => (
-                        <MaskedInput
-                          {...field}
-                          mask={dateMask}
-                          placeholder="Data de nascimento"
-                          type="text"
-                        />
-                      )}
-                    </Field>
-                    {errors.dataNascimento && touched.dataNascimento ? (
-                      <ErrorMessage>{errors.dataNascimento}</ErrorMessage>
-                    ) : null}
-                  </FormItem>
+                <FormItem>
+                  <Field name="dataNascimento" >
+                    {({ field }) => (
+                      <MaskedInput
+                        {...field}
+                        mask={dateMask}
+                        placeholder="Data de nascimento"
+                        type="text"
+                      />
+                    )}
+                  </Field>
+                  {errors.dataNascimento && touched.dataNascimento ? (
+                    <ErrorMessage>{errors.dataNascimento}</ErrorMessage>
+                  ) : null}
+                </FormItem>
 
-                  <FormItem>
-                    <Field name="cpf"  >
-                      {({ field }) => (
-                        <MaskedInput
-                          {...field}
-                          mask={cpfMask}
-                          placeholder="CPF"
-                          type="text"
-                        />
-                      )}
+                <FormItem>
+                  <Field name="cpf"  >
+                    {({ field }) => (
+                      <MaskedInput
+                        {...field}
+                        mask={cpfMask}
+                        placeholder="CPF"
+                        type="text"
+                      />
+                    )}
 
-                    </Field>
-                    {errors.cpf && touched.cpf ? (
-                      <ErrorMessage>{errors.cpf}</ErrorMessage>
-                    ) : null}
-                  </FormItem>
+                  </Field>
+                  {errors.cpf && touched.cpf ? (
+                    <ErrorMessage>{errors.cpf}</ErrorMessage>
+                  ) : null}
+                </FormItem>
 
-                  <FormItem>
-                    <Field name="email" placeholder="Email" type="email" />
-                    {errors.email && touched.email ? (
-                      <ErrorMessage>{errors.email}</ErrorMessage>
-                    ) : null}
-                  </FormItem>
+                <FormItem>
+                  <Field name="email" placeholder="Email" type="email" />
+                  {errors.email && touched.email ? (
+                    <ErrorMessage>{errors.email}</ErrorMessage>
+                  ) : null}
+                </FormItem>
 
-                  <FormItem>
-                    <div>
-                      <ButtonSecondary type="button" padding={"12px 32px"} onClick={() => navigate('/pessoas')}>Cancelar</ButtonSecondary>
+                <FormItem>
+                  <div>
+                    <ButtonSecondary type="button" padding={"12px 32px"} onClick={() => navigate('/pessoas')}>Cancelar</ButtonSecondary>
 
-                      <ButtonPrimary type="submit" padding={"12px 32px"}>{id ? "Atualizar" : "Cadastrar"}</ButtonPrimary>
-                    </div>
-                  </FormItem>
+                    <ButtonPrimary type="submit" padding={"12px 32px"}>{id ? "Atualizar" : "Cadastrar"}</ButtonPrimary>
+                  </div>
+                </FormItem>
 
-                </FormDiv>
-              </Form>
-            )}
-          </Formik>
+              </FormDiv>
+            </Form>
+          )}
+        </Formik>
 
-        </FormSection>
-      </FormContainer>
-    </>
+      </FormSection>
+    </FormContainer >
   )
 }
 export default FormPeople;

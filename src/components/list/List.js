@@ -4,8 +4,10 @@ import { backgroundLight, textLight } from "../../utils/colors";
 export const ContainerList = styled.section`
   display: grid;
   justify-content: center;
+  align-content: start;
   gap: 32px;
   padding: 24px 32px;
+  height: 100%;
   background-color: ${backgroundLight};
 `
 
@@ -24,27 +26,24 @@ export const ListTitle = styled.div`
   gap: 64px;
 `
 
-export const ListHeader = styled.div`
-  display: grid;
-  align-content: center;
-  color: ${textLight};
-  gap: 24px;
-  padding: 16px;
-  grid-template-columns: repeat(5, 1fr);
-`
-
 export const ListItem = styled.li`
-  display: grid;
+  display: ${(props) => props.display};
   align-items: center;
   gap: 24px;
   grid-template-columns: repeat(5, 1fr);
   padding: 24px 16px 24px;
   border-top: 1px solid #DFE0EB;
+  list-style: none;
 
   :hover{
     background-color: ${backgroundLight};
   }
   
+  :first-child{
+    border-radius: 8px 8px 0 0;
+    border-top: none;
+  }
+
   :last-child{
     border-radius: 0 0 8px 8px;
   }

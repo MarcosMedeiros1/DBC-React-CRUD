@@ -3,7 +3,7 @@ import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { AddressContext } from "../../context/AddressContext";
 import { ButtonPrimary, DefaultButton } from "../button/Button";
-import { ContainerList, List, ListHeader, ListItem, ListTitle } from "../list/List";
+import { ContainerList, List, ListItem, ListTitle } from "../list/List";
 import Modal from "../modal/Modal";
 
 const ListAddress = ({ list, id }) => {
@@ -30,26 +30,17 @@ const ListAddress = ({ list, id }) => {
       </ListTitle>
 
       <List>
-        <ListHeader>
-          <span>Tipo</span>
-          <span>Logradouro</span>
-          <span>Número</span>
-          <span>Complemento</span>
-          <span>CEP</span>
-          <span>Cidade</span>
-          <span>Estado</span>
-          <span>País</span>
-        </ListHeader>
         <ul>
           {list.map(item => (
-            <ListItem key={item.idEndereco}>
-              <span>{item.tipo}</span>
-              <span>{item.logradouro}</span>
-              <span>{item.numero}</span>
-              <span>{item.cep}</span>
-              <span>{item.cidade}</span>
-              <span>{item.estado}</span>
-              <span>{item.pais}</span>
+            <ListItem display={"flex"} key={item.idEndereco}>
+              <span>Tipo: {item.tipo}</span>
+              <span>Logradouro: {item.logradouro}</span>
+              <span>Número: {item.numero}</span>
+              <span>Complemento: {item.complemento}</span>
+              <span>CEP: {item.cep}</span>
+              <span>Cidade: {item.cidade}</span>
+              <span>Estado: {item.estado}</span>
+              <span>País: {item.pais}</span>
 
               <div>
                 <DefaultButton type="button" hoverColor={"#F12B2C"} onClick={() => handleDelete(item.idEndereco)}>

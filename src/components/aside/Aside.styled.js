@@ -5,7 +5,6 @@ export const AsideContainer = styled.aside`
   display: grid;
   align-content: start;
   gap: 48px;
-  height: 100%;
   background-color: #363740;
 `
 
