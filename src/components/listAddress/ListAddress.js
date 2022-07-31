@@ -3,7 +3,7 @@ import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { AddressContext } from "../../context/AddressContext";
 import { ButtonPrimary, DefaultButton } from "../button/Button";
-import { ContainerList, List, ListItem, ListTitle } from "../list/List";
+import { ContainerList, InfoAddress, List, ListItem, ListTitle } from "../list/List";
 import Modal from "../modal/Modal";
 
 const ListAddress = ({ list, id }) => {
@@ -17,6 +17,12 @@ const ListAddress = ({ list, id }) => {
   return (
     <ContainerList>
 
+      <ListTitle>
+        <h2>Endereços</h2>
+        <ButtonPrimary type="button" onClick={navigateCreate} padding={"12px 24px"}>Cadastrar endereço</ButtonPrimary>
+      </ListTitle>
+
+
       {isModalVisible &&
         <Modal
           onCancel={() => setIsModalVisible(false)}
@@ -24,39 +30,36 @@ const ListAddress = ({ list, id }) => {
           <h2>Confirmar exclusão?</h2>
         </Modal>}
 
-      <ListTitle>
-        <h2>Endereços</h2>
-        <ButtonPrimary type="button" onClick={navigateCreate} padding={"12px 24px"}>Cadastrar endereço</ButtonPrimary>
-      </ListTitle>
-
       <List>
         <ul>
           {list.map(item => (
-            <ListItem display={"flex"} key={item.idEndereco}>
-              <span>Tipo: {item.tipo}</span>
-              <span>Logradouro: {item.logradouro}</span>
-              <span>Número: {item.numero}</span>
-              <span>Complemento: {item.complemento}</span>
-              <span>CEP: {item.cep}</span>
-              <span>Cidade: {item.cidade}</span>
-              <span>Estado: {item.estado}</span>
-              <span>País: {item.pais}</span>
-
+            <ListItem key={item.idEndereco} columns={"repeat(1, 1fr)"}>
               <div>
-                <DefaultButton type="button" hoverColor={"#F12B2C"} onClick={() => handleDelete(item.idEndereco)}>
-                  <FaTrashAlt />
-                </DefaultButton>
+                <InfoAddress><strong>Tipo: </strong>{item.tipo}</InfoAddress>
+                <div>
+                  <DefaultButton type="button" hoverColor={"#F12B2C"} onClick={() => handleDelete(item.idEndereco)}>
+                    <FaTrashAlt />
+                  </DefaultButton>
 
-                <DefaultButton type="button" hoverColor={"#f39c12"} onClick={() => navigateUpdate(item.idEndereco)}>
-                  <FaEdit />
-                </DefaultButton >
+                  <DefaultButton type="button" hoverColor={"#f39c12"} onClick={() => navigateUpdate(item.idEndereco)}>
+                    <FaEdit />
+                  </DefaultButton >
+                </div>
               </div>
+
+              <InfoAddress><strong>Logradouro: </strong>{item.logradouro}</InfoAddress>
+              <InfoAddress><strong>Número: </strong>{item.numero}</InfoAddress>
+              <InfoAddress><strong>Complemento: </strong>{item.complemento}</InfoAddress>
+              <InfoAddress><strong>CEP: </strong>{item.cep}</InfoAddress>
+              <InfoAddress><strong>Cidade: </strong>{item.cidade}</InfoAddress>
+              <InfoAddress><strong>Estado: </strong>{item.estado}</InfoAddress>
+              <InfoAddress><strong>País: </strong>{item.pais}</InfoAddress>
             </ListItem>
           ))
           }
         </ul>
       </List>
-    </ContainerList>
+    </ContainerList >
   );
 }
 

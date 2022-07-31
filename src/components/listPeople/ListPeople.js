@@ -4,7 +4,7 @@ import { FaTrashAlt, FaUserEdit } from 'react-icons/fa';
 import { PeopleContext } from "../../context/PeopleContext";
 import { ButtonPrimary, ButtonSecondary, DefaultButton } from "../button/Button";
 import Modal from "../modal/Modal";
-import { ContainerList, List, ListItem, ListTitle } from "../list/List"
+import { ContainerList, Info, InfoPerson, List, ListHeader, ListItem, ListTitle } from "../list/List"
 import { FormatDateUsaToBr } from "../../utils/utils";
 
 const ListPeople = ({ list }) => {
@@ -35,13 +35,20 @@ const ListPeople = ({ list }) => {
       </ListTitle>
 
       <List>
+        <ListHeader>
+          <span>Nome</span>
+          <span>Data de nascimento</span>
+          <span>CPF</span>
+          <span>Email</span>
+          <span>Ações</span>
+        </ListHeader>
         <ul>
           {list.map(item => (
-            <ListItem display={"grid"} key={item.idPessoa}>
-              <span>Nome: {item.nome}</span>
-              <span>Data de nascimento: {FormatDateUsaToBr(item.dataNascimento)}</span>
-              <span>CPF: {item.cpf}</span>
-              <span>Email: {item.email}</span>
+            <ListItem key={item.idPessoa} columns={"repeat(5, 1fr)"}>
+              <InfoPerson>{item.nome}</InfoPerson>
+              <InfoPerson>{FormatDateUsaToBr(item.dataNascimento)}</InfoPerson>
+              <InfoPerson>{item.cpf}</InfoPerson>
+              <InfoPerson>{item.email}</InfoPerson>
 
               <div>
                 <DefaultButton type="button" hoverColor={"#F12B2C"} onClick={() => handleDelete(item.idPessoa)}>
