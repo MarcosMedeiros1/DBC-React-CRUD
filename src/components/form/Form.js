@@ -55,7 +55,8 @@ export const FormItem = styled.div`
   gap: 6px;
   color: ${textLight};
   
-  & input{
+
+  & input,select{
     background-color: #FCFDFE;
     border: 1px solid ${textLight};
     border-radius: 8px;

@@ -19,8 +19,6 @@ const SignupSchema = Yup.object().shape({
     .max(9, "Máximo 8 caracteres")
     .required("Campo obrigatório"),
   tipo: Yup.string()
-    .min(2, "Mínimo 2 caracteres")
-    .max(50, "Máximo 50 caracteres")
     .required("Campo obrigatório"),
   logradouro: Yup.string()
     .min(2, "Mínimo 2 caracteres")
@@ -71,15 +69,26 @@ const FormAddress = () => {
   const buscaCep = async (event, setFieldValue) => {
     const cep = OnlyNumbers(event.target.value);
 
+    if (cep.length !== 8) {
+      alert("CEP inválido");
+      return;
+    }
+
     try {
       const { data } = await apiViaCep.get(`/ws/${cep}/json`)
+      if (data.erro === "true") {
+        alert("CEP inválido");
+        return;
+      }
+
       setFieldValue("logradouro", data.logradouro)
       setFieldValue("complemento", data.complemento)
       setFieldValue("cidade", data.localidade)
       setFieldValue("estado", data.uf)
     } catch (error) {
-      alert("CEP inválido")
+      alert("CEP inválido");
     }
+
   }
 
   if (loading) {
@@ -105,10 +114,10 @@ const FormAddress = () => {
             pais: idAddress ? address.pais : ""
           }}
           validationSchema={SignupSchema}
-          onSubmit={(values) => {
+          onSubmit={(values, { resetForm }) => {
             values.cep = OnlyNumbers(values.cep);
             idAddress ? handleUpdate(values, idAddress, idPerson) : handleCreate(values);
-
+            resetForm({ value: "" });
           }}
         >
           {({ errors, touched, setFieldValue }) => (
@@ -131,7 +140,15 @@ const FormAddress = () => {
                 </FormItem>
 
                 <FormItem>
-                  <Field name="tipo" placeholder="Tipo" />
+                  <Field
+                    component="select"
+                    name="tipo"
+                    multiple={false}
+                  >
+                    <option value="" disabled defaultValue hidden>Selecione</option>
+                    <option value="RESIDENCIAL">Residencial</option>
+                    <option value="COMERCIAL">Comercial</option>
+                  </Field>
                   {errors.tipo && touched.tipo ? <ErrorMessage>{errors.tipo}</ErrorMessage> : null}
                 </FormItem>
 

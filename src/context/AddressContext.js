@@ -25,11 +25,10 @@ const AddressProvider = ({ children }) => {
   }, [])
 
   const handleCreate = async (values) => {
-    console.log(values);
     try {
-      await apiDbc.post(`/endereco/{idPessoa}?idPessoa=${idPerson}`, values);
+      await apiDbc.post(`/endereco/{idPessoa}?idPessoa=${values.idPessoa}`, values);
       alert("Endereço cadastrado com sucesso");
-      window.location.href = `/enderecos/${idPerson}`;
+      window.location.href = `/enderecos/${values.idPessoa}`;
     } catch (error) {
       alert(error);
     }
