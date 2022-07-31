@@ -8,9 +8,7 @@ import { useContext, useEffect, useState } from "react";
 import { PeopleContext } from "../../context/PeopleContext";
 import { apiDbc } from "../../api";
 import { Loading } from "../../components/loading/Loading";
-import { cpfMask, dateMask } from "../../utils/masks";
-import { FormatDateBrToUsa, FormatDateUsaToBr, OnlyNumbers } from "../../utils/utils";
-
+import { FormatDateBrToUsa, FormatDateUsaToBr, OnlyNumbers, cpfMask, dateMask } from "../../utils/utils";
 
 const SignupSchema = Yup.object().shape({
   nome: Yup.string()
