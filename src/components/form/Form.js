@@ -16,10 +16,6 @@ export const FormSection = styled.section`
   background-color: #fff;
   border-radius: 8px;
   border: 1px solid #DFE0EB;
-
-  @media (max-width: 360px){
-    padding-right: 8px;
-  }
 `
 
 export const TitleDiv = styled.div`

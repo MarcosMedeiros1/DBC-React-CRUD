@@ -4,7 +4,7 @@ import { FaTrashAlt, FaUserEdit, FaUserPlus } from 'react-icons/fa';
 import { PeopleContext } from "../../context/PeopleContext";
 import { ButtonSecondary, DefaultButton } from "../button/Button";
 import Modal from "../modal/Modal";
-import { ContainerList, InfoPerson, List, ListHeader, ListItem, ListAdd } from "../list/List"
+import { ContainerList, List, ListItem, ListAdd } from "../list/List"
 import { FormatDateUsaToBr } from "../../utils/utils";
 
 const ListPeople = ({ list }) => {
@@ -22,7 +22,7 @@ const ListPeople = ({ list }) => {
 
   if (list.length === 0) {
     return (
-      <ContainerList justify={"center"}>
+      <ContainerList>
 
         <ListAdd>
           <ButtonSecondary type="button" onClick={navigateCreate} padding={"12px 24px"} fontSize={"1rem"}>Cadastrar pessoa <FaUserPlus /></ButtonSecondary>
@@ -34,7 +34,7 @@ const ListPeople = ({ list }) => {
   }
 
   return (
-    <ContainerList justify={""}>
+    <ContainerList>
       {isModalVisible &&
         <Modal
           onCancel={() => setIsModalVisible(false)}
@@ -47,20 +47,13 @@ const ListPeople = ({ list }) => {
       </ListAdd>
 
       <List>
-        <ListHeader>
-          <span>Nome</span>
-          <span>Data de nascimento</span>
-          <span>CPF</span>
-          <span>Email</span>
-          <span>Ações</span>
-        </ListHeader>
         <ul>
           {list.map(item => (
-            <ListItem key={item.idPessoa} columns={"repeat(5, 1fr)"}>
-              <InfoPerson>{item.nome}</InfoPerson>
-              <InfoPerson>{FormatDateUsaToBr(item.dataNascimento)}</InfoPerson>
-              <InfoPerson>{item.cpf}</InfoPerson>
-              <InfoPerson>{item.email}</InfoPerson>
+            <ListItem key={item.idPessoa}>
+              <span><strong>Nome: </strong> {item.nome}</span>
+              <span><strong>Data de nascimento: </strong>{FormatDateUsaToBr(item.dataNascimento)}</span>
+              <span><strong>CPF: </strong>{item.cpf}</span>
+              <span><strong>Email: </strong>{item.email}</span>
 
               <div>
                 <DefaultButton type="button" hoverColor={"#F12B2C"} onClick={() => handleDelete(item.idPessoa)}>

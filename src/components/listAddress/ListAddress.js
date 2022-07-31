@@ -4,7 +4,7 @@ import { BsCardText } from 'react-icons/bs'
 import { useNavigate } from "react-router-dom";
 import { AddressContext } from "../../context/AddressContext";
 import { ButtonSecondary, DefaultButton } from "../button/Button";
-import { ContainerList, InfoAddress, List, ListItem, ListAdd } from "../list/List";
+import { ContainerList, List, ListItem, ListAdd } from "../list/List";
 import Modal from "../modal/Modal";
 
 const ListAddress = ({ list, id }) => {
@@ -17,7 +17,7 @@ const ListAddress = ({ list, id }) => {
 
   if (list.length === 0) {
     return (
-      <ContainerList justify={"center"}>
+      <ContainerList>
 
         <ListAdd>
           <ButtonSecondary type="button" onClick={navigateCreate} padding={"12px 24px"} fontSize={"1rem"}>Cadastrar endereço <BsCardText /></ButtonSecondary>
@@ -29,14 +29,11 @@ const ListAddress = ({ list, id }) => {
   }
 
   return (
-    <ContainerList justify={"center"}>
-
+    <ContainerList>
 
       <ListAdd>
         <ButtonSecondary type="button" onClick={navigateCreate} padding={"12px 24px"} fontSize={"1rem"}>Cadastrar endereço <BsCardText /></ButtonSecondary>
       </ListAdd>
-
-
 
       {isModalVisible &&
         <Modal
@@ -48,9 +45,9 @@ const ListAddress = ({ list, id }) => {
       <List>
         <ul>
           {list.map(item => (
-            <ListItem key={item.idEndereco} columns={"repeat(1, 1fr)"}>
+            <ListItem key={item.idEndereco}>
               <div>
-                <InfoAddress><strong>Tipo: </strong>{item.tipo}</InfoAddress>
+                <span><strong>Tipo: </strong>{item.tipo}</span>
                 <div>
                   <DefaultButton type="button" hoverColor={"#F12B2C"} onClick={() => handleDelete(item.idEndereco)}>
                     <FaTrashAlt />
@@ -62,13 +59,13 @@ const ListAddress = ({ list, id }) => {
                 </div>
               </div>
 
-              <InfoAddress><strong>Logradouro: </strong>{item.logradouro}</InfoAddress>
-              <InfoAddress><strong>Número: </strong>{item.numero}</InfoAddress>
-              <InfoAddress><strong>Complemento: </strong>{item.complemento}</InfoAddress>
-              <InfoAddress><strong>CEP: </strong>{item.cep}</InfoAddress>
-              <InfoAddress><strong>Cidade: </strong>{item.cidade}</InfoAddress>
-              <InfoAddress><strong>Estado: </strong>{item.estado}</InfoAddress>
-              <InfoAddress><strong>País: </strong>{item.pais}</InfoAddress>
+              <span><strong>Logradouro: </strong>{item.logradouro}</span>
+              <span><strong>Número: </strong>{item.numero}</span>
+              <span><strong>Complemento: </strong>{item.complemento}</span>
+              <span><strong>CEP: </strong>{item.cep}</span>
+              <span><strong>Cidade: </strong>{item.cidade}</span>
+              <span><strong>Estado: </strong>{item.estado}</span>
+              <span><strong>País: </strong>{item.pais}</span>
             </ListItem>
           ))
           }

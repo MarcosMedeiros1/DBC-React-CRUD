@@ -8,6 +8,11 @@ export const HeaderContainer = styled.header`
   align-items: center;
   padding: 16px 32px;
   background-color: ${backgroundDark};
+
+
+  @media (max-width: 545px){
+    padding: 16px;
+  }
 `
 
 export const Ul = styled.ul`
@@ -46,6 +51,7 @@ export const Ul = styled.ul`
     opacity: 1;  
     transform: translateY(0);
   }
+  
 }
 `
 
@@ -70,5 +76,17 @@ justify-content: center;
     display: flex;
     align-items: center;
     color: ${primaryColor};
+  }
+
+  @media (max-width: 545px){
+    & h1{
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 425px){
+    & svg{
+     display: none;
+    }
   }
 `
