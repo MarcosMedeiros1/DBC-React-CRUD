@@ -80,7 +80,7 @@ const FormPeople = () => {
             if (moment(values.dataNascimento).isValid()) {
               id ? handleUpdate(values, id) : handleCreate(values);
               resetForm({ value: "" });
-              setTimeout(() => { navigate("/pessoas") }, 1000)
+              setTimeout(() => { navigate("/pessoas") }, 1000);
             }
             else {
               toast.error("Insira uma data válida");

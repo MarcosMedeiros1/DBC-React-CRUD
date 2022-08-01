@@ -43,7 +43,7 @@ const AuthProvider = ({ children }) => {
     try {
       await apiDbc.post('/auth/create', values);
       toast.success('Cadastrado com sucesso');
-      window.location.href = '/';
+      setTimeout(() => { window.location.href = '/' }, 1000);
     } catch (error) {
       console.log(error);
       toast.error("Dados incorretos");

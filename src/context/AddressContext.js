@@ -32,7 +32,7 @@ const AddressProvider = ({ children }) => {
     try {
       await apiDbc.post(`/endereco/{idPessoa}?idPessoa=${values.idPessoa}`, values);
       toast.success("Endereço cadastrado com sucesso");
-      window.location.href = `/enderecos/${values.idPessoa}`;
+      setTimeout(() => { window.location.href = `/enderecos/${values.idPessoa}` }, 1000);
     } catch (error) {
       console.log(error);
       toast.error("Dados incorretos");

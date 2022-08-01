@@ -33,7 +33,7 @@ const PeopleProvider = ({ children }) => {
     try {
       await apiDbc.post(`/pessoa`, values);
       toast.success('Pessoa cadastrada com sucesso');
-      window.location.href = '/pessoa';
+      setTimeout(() => { window.location.href = '/pessoas' }, 1000);
     } catch (error) {
       console.log(error);
       toast.error("Dados incorretos");
