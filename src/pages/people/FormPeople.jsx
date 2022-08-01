@@ -1,6 +1,7 @@
 import MaskedInput from "react-text-mask";
 import { useNavigate, useParams } from "react-router-dom"
 import { Formik, Form, Field } from "formik";
+import moment from 'moment';
 import * as Yup from "yup";
 import { FormDiv, FormItem, ErrorMessage, FormContainer, FormSection, TitleDiv } from "../../components/form/Form";
 import { ButtonPrimary, ButtonSecondary } from "../../components/button/Button";
@@ -74,9 +75,14 @@ const FormPeople = () => {
           onSubmit={(values, { resetForm }) => {
             values.dataNascimento = FormatDateBrToUsa(values.dataNascimento);
             values.cpf = OnlyNumbers(values.cpf);
-            id ? handleUpdate(values, id) : handleCreate(values);
-            resetForm({ value: "" });
-            setTimeout(() => { navigate("/pessoas") }, 1000)
+            if (moment(values.dataNascimento).isValid()) {
+              id ? handleUpdate(values, id) : handleCreate(values);
+              resetForm({ value: "" });
+              setTimeout(() => { navigate("/pessoas") }, 1000)
+            }
+            else {
+              alert("Insira uma data válida");
+            }
           }}
         >
           {({ errors, touched }) => (

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { backgroundDark, backgroundLight } from "../../utils/utils";
+import { backgroundDark, backgroundLight, textLight } from "../../utils/utils";
 
 export const ContainerList = styled.section`
   display: grid;
@@ -16,7 +16,7 @@ export const ContainerList = styled.section`
   }
 
   @media (max-width: 425px){
-    padding: 0;
+    padding: 16px 0;
   }
 `
 
@@ -25,6 +25,20 @@ export const List = styled.div`
   border-radius: 8px;
   background-color: #fff;
   border: 1px solid #DFE0EB;
+`
+
+export const ListHeader = styled.div`
+  display: grid;
+  align-content: center;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px;
+  color: ${textLight};
+  padding: 16px 24px;
+  border-bottom: 1px solid #DFE0EB;
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
 `
 
 export const ListAdd = styled.div`
@@ -36,10 +50,27 @@ export const ListItem = styled.li`
   display: grid;
   align-items: center;
   gap: 24px;
-  grid-template-columns: 1fr;
+  grid-template-columns: ${(props) => props.columns};
   padding: 24px;
   border-top: 1px solid #DFE0EB;
   list-style: none;
+
+  & strong {
+      display: none;
+  }
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr 1fr;
+
+    & strong {
+      display: inline;
+    }
+   }
+
+  @media (max-width: 767px) {
+      grid-template-columns: 1fr;
+  }
+  
 
   :hover{
     background-color: ${backgroundLight};
@@ -58,5 +89,17 @@ export const ListItem = styled.li`
     display: flex;
     align-items: center;
     gap: 16px;
+  }
+`
+
+export const InfoPerson = styled.span`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`
+
+export const InfoAddress = styled.span`
+  & strong{
+    display: inline;
   }
 `

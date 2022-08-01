@@ -32,7 +32,7 @@ const PeopleProvider = ({ children }) => {
       alert('Pessoa cadastrada com sucesso');
       window.location.href = '/pessoa';
     } catch (error) {
-      alert(error)
+      alert(error);
     }
   }
 
