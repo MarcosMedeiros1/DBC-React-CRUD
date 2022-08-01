@@ -15,7 +15,7 @@ export const ContainerList = styled.section`
   text-align: center;
   }
 
-  @media (max-width: 425px){
+  @media (max-width: 430px){
     padding: 16px 0;
   }
 `
@@ -25,6 +25,10 @@ export const List = styled.div`
   border-radius: 8px;
   background-color: #fff;
   border: 1px solid #DFE0EB;
+
+  @media (max-width: 430px){
+    width: 100vw;
+  }
 `
 
 export const ListHeader = styled.div`
@@ -61,14 +65,19 @@ export const ListItem = styled.li`
 
   @media (max-width: 1024px) {
     grid-template-columns: 1fr 1fr;
+    width: 100vw;
 
     & strong {
       display: inline;
     }
    }
 
-  @media (max-width: 767px) {
-      grid-template-columns: 1fr;
+  @media (max-width: 768px) {
+      grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
   }
   
 
