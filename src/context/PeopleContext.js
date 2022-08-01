@@ -64,7 +64,8 @@ const PeopleProvider = ({ children }) => {
   const handleUpdate = async (values, idPessoa) => {
     try {
       await apiDbc.put(`/pessoa/${idPessoa}`, values)
-      window.location.href = '/pessoas';
+      toast.success("Atualizado com sucesso");
+      setTimeout(() => { window.location.href = "/pessoas" }, 1000);
     } catch (error) {
       console.log(error);
       toast.error("Não foi possível atualizar a pessoa");

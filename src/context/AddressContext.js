@@ -46,7 +46,8 @@ const AddressProvider = ({ children }) => {
   const handleUpdate = async (values, idAddress, idPerson) => {
     try {
       await apiDbc.put(`/endereco/${idAddress}`, values);
-      window.location.href = `/enderecos/${idPerson}`;
+      toast.success("Atualizado com sucesso");
+      setTimeout(() => { window.location.href = `/enderecos/${idPerson}` }, 1000);
     } catch (error) {
       console.log(error);
       toast.error("Não foi possível atualizar o endereço");
