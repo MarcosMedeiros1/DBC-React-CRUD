@@ -33,8 +33,9 @@ const Users = () => {
               senha: "",
             }}
             validationSchema={SignupSchema}
-            onSubmit={(values) => {
+            onSubmit={(values, { resetForm }) => {
               handleRegister(values);
+              resetForm({ value: "" });
             }}
           >
             {({ errors, touched }) => (

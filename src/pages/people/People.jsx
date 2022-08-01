@@ -9,7 +9,7 @@ const People = () => {
 
   return (
     <Container>
-      <Header visibility={"hidden"} page={" - Pessoas"} />
+      <Header display={"none"} page={"Pessoas"} />
       <div>
         <ListPeople list={pessoas} />
       </div>

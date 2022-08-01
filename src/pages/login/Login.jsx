@@ -35,8 +35,9 @@ const Login = () => {
               senha: "",
             }}
             validationSchema={SignupSchema}
-            onSubmit={(values) => {
+            onSubmit={(values, { resetForm }) => {
               handleLogin(values);
+              resetForm({ value: "" });
             }}
           >
             {({ errors, touched }) => (

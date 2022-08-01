@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import toast, { Toaster } from 'react-hot-toast';
 import { apiDbc } from "../api";
 import { Loading } from "../components/loading/Loading";
 import { AuthContext } from "./AuthContext";
@@ -18,7 +19,8 @@ const PeopleProvider = ({ children }) => {
       setPessoas(data.content);
       setLoading(false);
     } catch (error) {
-      alert(error)
+      console.log(error);
+      toast.error("Não foi possível encontrar pessoas");
     }
   }
 
@@ -29,10 +31,11 @@ const PeopleProvider = ({ children }) => {
   const handleCreate = async (values) => {
     try {
       await apiDbc.post(`/pessoa`, values);
-      alert('Pessoa cadastrada com sucesso');
+      toast.success('Pessoa cadastrada com sucesso');
       window.location.href = '/pessoa';
     } catch (error) {
-      alert(error);
+      console.log(error);
+      toast.error("Dados incorretos");
     }
   }
 
@@ -45,10 +48,11 @@ const PeopleProvider = ({ children }) => {
     try {
       await apiDbc.delete(`/pessoa/${idPessoa}`);
       setIsModalVisible(false);
-      alert("Pessoa deletada com sucesso");
+      toast.success("Pessoa deletada com sucesso");
       setup();
     } catch (error) {
-      alert(error)
+      console.log(error);
+      toast.error("Não foi possível deletar a pessoa");
     }
   }
 
@@ -61,7 +65,8 @@ const PeopleProvider = ({ children }) => {
       await apiDbc.put(`/pessoa/${idPessoa}`, values)
       window.location.href = '/pessoas';
     } catch (error) {
-      alert(error)
+      console.log(error);
+      toast.error("Não foi possível atualizar a pessoa");
     }
   }
 
@@ -70,18 +75,21 @@ const PeopleProvider = ({ children }) => {
   }
 
   return (
-    <PeopleContext.Provider value={{
-      handleDelete,
-      confirmDelete,
-      handleUpdate,
-      navigateUpdate,
-      handleCreate,
-      isModalVisible,
-      setIsModalVisible,
-      pessoas,
-    }}>
-      {children}
-    </PeopleContext.Provider>
+    <>
+      <Toaster />
+      <PeopleContext.Provider value={{
+        handleDelete,
+        confirmDelete,
+        handleUpdate,
+        navigateUpdate,
+        handleCreate,
+        isModalVisible,
+        setIsModalVisible,
+        pessoas,
+      }}>
+        {children}
+      </PeopleContext.Provider>
+    </>
   )
 }
 

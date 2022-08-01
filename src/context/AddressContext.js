@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from "react";
+import toast, { Toaster } from 'react-hot-toast';
 import { apiDbc } from "../api";
 import { Loading } from "../components/loading/Loading";
 
@@ -18,7 +19,8 @@ const AddressProvider = ({ children }) => {
       setAddress(data);
       setLoading(false);
     } catch (error) {
-      alert(error);
+      console.log(error);
+      toast.error("Não foi possível encontrar endereços");
     }
   }
 
@@ -29,10 +31,11 @@ const AddressProvider = ({ children }) => {
   const handleCreate = async (values) => {
     try {
       await apiDbc.post(`/endereco/{idPessoa}?idPessoa=${values.idPessoa}`, values);
-      alert("Endereço cadastrado com sucesso");
+      toast.success("Endereço cadastrado com sucesso");
       window.location.href = `/enderecos/${values.idPessoa}`;
     } catch (error) {
-      alert(error);
+      console.log(error);
+      toast.error("Dados incorretos");
     }
   }
 
@@ -45,7 +48,8 @@ const AddressProvider = ({ children }) => {
       await apiDbc.put(`/endereco/${idAddress}`, values);
       window.location.href = `/enderecos/${idPerson}`;
     } catch (error) {
-      alert(error)
+      console.log(error);
+      toast.error("Não foi possível atualizar o endereço");
     }
   }
 
@@ -58,10 +62,11 @@ const AddressProvider = ({ children }) => {
     try {
       await apiDbc.delete(`/endereco/${idAddress}`);
       setIsModalVisible(false);
-      alert("Endereço deletado com sucesso");
+      toast.success("Endereço deletado com sucesso");
       getAddress(idPerson);
     } catch (error) {
-      alert(error)
+      console.log(error);
+      toast.error("Não foi possível deletar o endereço");
     }
   }
 
@@ -70,18 +75,21 @@ const AddressProvider = ({ children }) => {
   }
 
   return (
-    <AddressContext.Provider value={{
-      address,
-      getAddress,
-      handleCreate,
-      handleDelete,
-      confirmDelete,
-      isModalVisible,
-      setIsModalVisible,
-      setIdPerson,
-      navigateUpdate,
-      handleUpdate
-    }}>{children}</AddressContext.Provider>
+    <>
+      <Toaster />
+      <AddressContext.Provider value={{
+        address,
+        getAddress,
+        handleCreate,
+        handleDelete,
+        confirmDelete,
+        isModalVisible,
+        setIsModalVisible,
+        setIdPerson,
+        navigateUpdate,
+        handleUpdate
+      }}>{children}</AddressContext.Provider>
+    </>
   )
 }
 

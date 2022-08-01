@@ -6,7 +6,7 @@ const Logo = ({ page }) => {
     <LogoContainer>
       <div>
         <IoLogoCodepen style={{ fontSize: 50 }} />
-        <h1>Dashboard {page}</h1>
+        <h1>{page}</h1>
       </div>
     </LogoContainer>
   );

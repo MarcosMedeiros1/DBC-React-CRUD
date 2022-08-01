@@ -1,5 +1,6 @@
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+import toast, { Toaster } from 'react-hot-toast';
 import { useContext, useEffect, useState } from "react";
 import MaskedInput from "react-text-mask";
 import { useNavigate, useParams } from "react-router-dom";
@@ -57,7 +58,8 @@ const FormAddress = () => {
       setAddress(data);
       setLoading(false);
     } catch (error) {
-      alert(error);
+      console.log(error);
+      toast.error("Não foi possível encontrar o endereço");
     }
   }
 
@@ -69,14 +71,14 @@ const FormAddress = () => {
     const cep = OnlyNumbers(event.target.value);
 
     if (cep.length !== 8) {
-      alert("CEP inválido");
+      toast.error("CEP inválido");
       return;
     }
 
     try {
       const { data } = await apiViaCep.get(`/ws/${cep}/json`)
       if (data.erro === "true") {
-        alert("CEP inválido");
+        toast.error("CEP inválido");
         return;
       }
 
@@ -85,7 +87,7 @@ const FormAddress = () => {
       setFieldValue("cidade", data.localidade)
       setFieldValue("estado", data.uf)
     } catch (error) {
-      alert("CEP inválido");
+      toast.error("CEP inválido");
     }
 
   }
@@ -192,10 +194,9 @@ const FormAddress = () => {
             </Form>
           )}
         </Formik>
-
       </FormSection>
+      <Toaster />
     </FormContainer>
-
   )
 };
 

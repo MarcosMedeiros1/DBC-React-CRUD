@@ -15,7 +15,7 @@ const Address = () => {
 
   return (
     <Container>
-      <Header visibility={'visible'} page={" - Endereços"} />
+      <Header display={'inline'} page={"Endereços"} />
       <div>
         <ListAddress list={address} id={id} />
       </div>

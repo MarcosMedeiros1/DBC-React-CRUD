@@ -11,7 +11,7 @@ export const HeaderContainer = styled.header`
 
 
   @media (max-width: 545px){
-    padding: 16px;
+    padding: 16px 8px;
   }
 `
 
@@ -28,7 +28,7 @@ export const Ul = styled.ul`
   padding-bottom: 1px;
   color: ${textLight};
   position: relative;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
 
   :hover{
     color: #fff;
@@ -80,11 +80,11 @@ justify-content: center;
 
   @media (max-width: 545px){
     & h1{
-      font-size: 1rem;
+      font-size: 1.2rem;
     }
   }
 
-  @media (max-width: 425px){
+  @media (max-width: 430px){
     & svg{
      display: none;
     }

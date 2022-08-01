@@ -1,5 +1,6 @@
 import MaskedInput from "react-text-mask";
 import { useNavigate, useParams } from "react-router-dom"
+import toast, { Toaster } from 'react-hot-toast';
 import { Formik, Form, Field } from "formik";
 import moment from 'moment';
 import * as Yup from "yup";
@@ -46,7 +47,8 @@ const FormPeople = () => {
       setPessoa(data[0]);
       setLoading(false);
     } catch (error) {
-      alert(error);
+      console.log(error);
+      toast.error("Não foi possível encontrar pessoas");
     }
   }
 
@@ -81,7 +83,7 @@ const FormPeople = () => {
               setTimeout(() => { navigate("/pessoas") }, 1000)
             }
             else {
-              alert("Insira uma data válida");
+              toast.error("Insira uma data válida");
             }
           }}
         >
@@ -149,6 +151,7 @@ const FormPeople = () => {
         </Formik>
 
       </FormSection>
+      <Toaster />
     </FormContainer >
   )
 }

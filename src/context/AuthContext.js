@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from "react";
+import toast, { Toaster } from 'react-hot-toast';
 import { apiDbc } from "../api";
 import { Loading } from "../components/loading/Loading";
 
@@ -27,7 +28,7 @@ const AuthProvider = ({ children }) => {
       window.location.href = '/pessoas'
     } catch (error) {
       console.log(error);
-      alert("Login ou senha incorretos");
+      toast.error('Login ou senha incorretos');
     }
   };
 
@@ -35,16 +36,17 @@ const AuthProvider = ({ children }) => {
     localStorage.removeItem("token");
     apiDbc.defaults.headers.common["Authorization"] = undefined;
     setAuth(false);
-    window.location.href = '/'
+    window.location.href = '/';
   };
 
   const handleRegister = async (values) => {
     try {
       await apiDbc.post('/auth/create', values);
-      alert('Cadastrado com sucesso')
+      toast.success('Cadastrado com sucesso');
       window.location.href = '/';
     } catch (error) {
-      alert(error)
+      console.log(error);
+      toast.error("Dados incorretos");
     }
   }
 
@@ -53,11 +55,14 @@ const AuthProvider = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider
-      value={{ handleLogin, handleLogout, handleRegister, auth }}
-    >
-      {children}
-    </AuthContext.Provider>
+    <>
+      <Toaster />
+      <AuthContext.Provider
+        value={{ handleLogin, handleLogout, handleRegister, auth }}
+      >
+        {children}
+      </AuthContext.Provider>
+    </>
   );
 };
 
