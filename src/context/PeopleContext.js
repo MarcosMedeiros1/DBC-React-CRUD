@@ -11,7 +11,7 @@ const PeopleProvider = ({ children }) => {
   const [idPessoa, setIdPessoa] = useState("");
   const [pessoas, setPessoas] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { auth } = useContext(AuthContext);
+  const { auth, handleLogout } = useContext(AuthContext);
 
   const setup = async () => {
     try {
@@ -21,6 +21,7 @@ const PeopleProvider = ({ children }) => {
     } catch (error) {
       console.log(error);
       toast.error("Não foi possível encontrar pessoas");
+      handleLogout();
     }
   }
 
