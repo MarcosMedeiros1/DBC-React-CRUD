@@ -29,10 +29,7 @@ const ContactProvider = ({ children }) => {
   }, [])
 
   const handleCreate = async (values, idPerson) => {
-    console.log("aqui");
-
     try {
-      console.log("ali");
       await apiDbc.post(`/contato/${idPerson}`, values);
       toast.success("Contato cadastrado com sucesso");
       setTimeout(() => { window.location.href = `/contatos/${idPerson}` }, 1000);

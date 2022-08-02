@@ -26,7 +26,7 @@ const ContactSchema = Yup.object().shape({
 });
 
 const FormContacts = () => {
-  const { handleUpdate } = useContext(ContactsContext);
+  const { handleCreate, handleUpdate } = useContext(ContactsContext);
   const { idPerson, idContact } = useParams();
   const [loading, setLoading] = useState(true);
   const [contact, setContact] = useState({});
@@ -47,19 +47,6 @@ const FormContacts = () => {
   useEffect(() => {
     idContact ? setup() : setLoading(false);
   }, []);
-
-
-  const handleCreate = async (values, idPerson) => {
-    try {
-      await apiDbc.post(`/contato/${idPerson}`, values);
-      toast.success("Contato cadastrado com sucesso");
-      setTimeout(() => { window.location.href = `/contatos/${idPerson}` }, 1000);
-    } catch (error) {
-      console.log(error);
-      console.log(values);
-      toast.error("Dados incorretos");
-    }
-  }
 
   if (loading) {
     return (<Loading></Loading>)
