@@ -8,6 +8,8 @@ import Users from "./pages/users/Users";
 import NotFound from "./pages/notFound/NotFound";
 import FormPeople from "./pages/people/FormPeople";
 import FormAddress from "./pages/address/FormAddress";
+import Contacts from "./pages/contacts/Contacts";
+import FormContacts from "./pages/contacts/FormContacts";
 
 const Routers = () => {
   const { auth } = useContext(AuthContext);
@@ -26,6 +28,10 @@ const Routers = () => {
               <Route path="/pessoas" element={<People />} />
               <Route path="/cadastrar-pessoa" element={<FormPeople />} />
               <Route path="/editar-pessoa/:id" element={<FormPeople />} />
+
+              <Route path="/contatos/:id" element={<Contacts />} />
+              <Route path="/cadastrar-contato/:idPerson" element={<FormContacts />} />
+              <Route path="/editar-contato/:idPerson/:idContact" element={<FormContacts />} />
 
               <Route path="/enderecos/:id" element={<Address />} />
               <Route path="/cadastrar-endereco/:idPerson" element={<FormAddress />} />

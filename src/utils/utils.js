@@ -42,6 +42,24 @@ export const cepMask = [
   /\d/
 ];
 
+export const telefoneMask = [
+  "(",
+  /\d/,
+  /\d/,
+  ")",
+  " ",
+  /\d/,
+  /\d/,
+  /\d/,
+  /\d/,
+  /\d/,
+  "-",
+  /\d/,
+  /\d/,
+  /\d/,
+  /\d/
+];
+
 export function OnlyNumbers(value) {
   return value.replace(/[^0-9]/gi, '')
 }

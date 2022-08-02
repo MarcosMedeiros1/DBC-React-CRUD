@@ -1,9 +1,9 @@
-import { useContext, useEffect } from "react";
-import ListAddress from "../../components/listAddress/ListAddress";
-import { Container } from "../../components/container/Container";
-import Header from "../../components/header/Header";
 import { useParams } from "react-router-dom";
+import { useContext, useEffect } from "react";
 import { AddressContext } from "../../context/AddressContext";
+import { Container } from "../../components/container/Container";
+import ListAddress from "../../components/listAddress/ListAddress";
+import Header from "../../components/header/Header";
 
 const Address = () => {
   const { id } = useParams();

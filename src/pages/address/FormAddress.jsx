@@ -1,18 +1,17 @@
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+import MaskedInput from "react-text-mask";
 import toast, { Toaster } from 'react-hot-toast';
 import { useContext, useEffect, useState } from "react";
-import MaskedInput from "react-text-mask";
 import { useNavigate, useParams } from "react-router-dom";
 import { apiDbc, apiViaCep } from "../../api";
 import { cepMask, OnlyNumbers } from "../../utils/utils";
-import { FormContainer, FormDiv, FormItem, FormSection, TitleDiv } from "../../components/form/Form";
+import { FormContainer, ErrorMessage, FormDiv, FormItem, FormSection, TitleDiv } from "../../components/form/Form";
 import { ButtonPrimary, ButtonSecondary } from "../../components/button/Button";
-import { ErrorMessage } from "../../components/form/Form";
 import { AddressContext } from "../../context/AddressContext";
 import { Loading } from "../../components/loading/Loading";
 
-const SignupSchema = Yup.object().shape({
+const AddressSchema = Yup.object().shape({
   cep: Yup.string()
     .transform(value => OnlyNumbers(value))
     .min(8, "Mínimo 8 caracteres")
@@ -114,7 +113,7 @@ const FormAddress = () => {
             estado: idAddress ? address.estado : "",
             pais: idAddress ? address.pais : ""
           }}
-          validationSchema={SignupSchema}
+          validationSchema={AddressSchema}
           onSubmit={(values, { resetForm }) => {
             values.cep = OnlyNumbers(values.cep);
             idAddress ? handleUpdate(values, idAddress, idPerson) : handleCreate(values);
@@ -146,7 +145,7 @@ const FormAddress = () => {
                     name="tipo"
                     multiple={false}
                   >
-                    <option value="" disabled defaultValue hidden>Selecione</option>
+                    <option value="" disabled defaultValue hidden>Selecione o tipo do endereço</option>
                     <option value="RESIDENCIAL">Residencial</option>
                     <option value="COMERCIAL">Comercial</option>
                   </Field>

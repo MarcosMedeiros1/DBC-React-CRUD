@@ -4,7 +4,7 @@ import { BsCardText } from 'react-icons/bs'
 import { useNavigate } from "react-router-dom";
 import { AddressContext } from "../../context/AddressContext";
 import { ButtonSecondary, DefaultButton } from "../button/Button";
-import { ContainerList, List, ListItem, ListAdd, InfoAddress } from "../list/List";
+import { ContainerList, List, ListItem, ListAdd, Info } from "../list/List";
 import Modal from "../modal/Modal";
 
 const ListAddress = ({ list, id }) => {
@@ -46,14 +46,14 @@ const ListAddress = ({ list, id }) => {
         <ul>
           {list.map(item => (
             <ListItem key={item.idEndereco} columns={"repeat(3, 1fr)"}>
-              <InfoAddress><strong>Logradouro: </strong>{item.logradouro}</InfoAddress>
-              <InfoAddress><strong>Número: </strong>{item.numero}</InfoAddress>
-              <InfoAddress><strong>Complemento: </strong>{item.complemento}</InfoAddress>
-              <InfoAddress><strong>CEP: </strong>{item.cep}</InfoAddress>
-              <InfoAddress><strong>Cidade: </strong>{item.cidade}</InfoAddress>
-              <InfoAddress><strong>Estado: </strong>{item.estado}</InfoAddress>
-              <InfoAddress><strong>País: </strong>{item.pais}</InfoAddress>
-              <InfoAddress><strong>Tipo: </strong>{item.tipo}</InfoAddress>
+              <Info><strong>Logradouro: </strong>{item.logradouro}</Info>
+              <Info><strong>Número: </strong>{item.numero}</Info>
+              <Info><strong>Complemento: </strong>{item.complemento}</Info>
+              <Info><strong>CEP: </strong>{item.cep}</Info>
+              <Info><strong>Cidade: </strong>{item.cidade}</Info>
+              <Info><strong>Estado: </strong>{item.estado}</Info>
+              <Info><strong>País: </strong>{item.pais}</Info>
+              <Info><strong>Tipo: </strong>{item.tipo}</Info>
 
               <div>
                 <DefaultButton type="button" hoverColor={"#F12B2C"} onClick={() => handleDelete(item.idEndereco)}>

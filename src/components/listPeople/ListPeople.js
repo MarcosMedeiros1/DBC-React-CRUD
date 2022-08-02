@@ -20,6 +20,10 @@ const ListPeople = ({ list }) => {
     navigate(`/enderecos/${id}`)
   }
 
+  const navigateContact = (id) => {
+    navigate(`/contatos/${id}`);
+  }
+
   if (list.length === 0) {
     return (
       <ContainerList>
@@ -72,6 +76,8 @@ const ListPeople = ({ list }) => {
                 </DefaultButton >
 
                 <ButtonSecondary type="button" padding={"6px 12px"} fontSize={"14px"} onClick={() => navigateAddress(item.idPessoa)}>Endereços</ButtonSecondary>
+
+                <ButtonSecondary type="button" padding={"6px 12px"} fontSize={"14px"} onClick={() => navigateContact(item.idPessoa)}>Contatos</ButtonSecondary>
               </div>
             </ListItem>
           ))

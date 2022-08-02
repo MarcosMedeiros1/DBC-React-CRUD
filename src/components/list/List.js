@@ -35,7 +35,6 @@ export const ListHeader = styled.div`
   display: grid;
   align-content: center;
   grid-template-columns: repeat(5, 1fr);
-  gap: 24px;
   color: ${textLight};
   padding: 16px 24px;
   border-bottom: 1px solid #DFE0EB;
@@ -107,7 +106,7 @@ export const InfoPerson = styled.span`
   text-overflow: ellipsis;
 `
 
-export const InfoAddress = styled.span`
+export const Info = styled.span`
   & strong{
     display: inline;
   }
