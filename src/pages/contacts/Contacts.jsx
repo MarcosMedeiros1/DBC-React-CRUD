@@ -15,7 +15,7 @@ const Contacts = () => {
 
   return (
     <Container>
-      <Header display={"inline"} page={"Pessoas"} />
+      <Header display={"inline"} page={"Contatos"} />
 
       <div>
         <ListContacts list={contacts} id={id} />
